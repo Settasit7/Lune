@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "267069975855",
+    "project_id": "luneapplication",
+    "storage_bucket": "luneapplication.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:267069975855:android:3607cc83f4d0e781c085da",
+        "android_client_info": {
+          "package_name": "com.settasit.lune"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "***************************************"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
