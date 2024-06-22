@@ -1,8 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lune/components/my_button.dart';
 import 'package:lune/components/my_text_field.dart';
-import 'package:just_audio/just_audio.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class LoginPage extends StatefulWidget {
   final void Function()? onTap;
@@ -16,16 +15,14 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final emailTextController = TextEditingController();
+  final passwordTextController = TextEditingController();
 
   void login() async {
-    String filePath = 'music-1.mp3';
-    String downloadURL = await firebase_storage.FirebaseStorage.instance.ref(filePath).getDownloadURL();
-    final player = AudioPlayer();
-    await player.setUrl(downloadURL);
-    player.play();
-    await player.seek(const Duration(seconds: 10));
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: emailTextController.text,
+      password: passwordTextController.text
+    );
   }
 
   @override
@@ -60,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 25),
           
                 MyTextField(
-                  controller: emailController,
+                  controller: emailTextController,
                   hintText: 'Email',
                   obscureText: false,
                 ),
@@ -68,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 10),
 
                 MyTextField(
-                  controller: passwordController,
+                  controller: passwordTextController,
                   hintText: 'Password',
                   obscureText: true,
                 ),

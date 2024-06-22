@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lune/firebase_options.dart';
 import 'package:lune/pages/introduction_page.dart';
+import 'package:lune/services/auth/auth.dart';
 import 'package:lune/services/auth/login_or_sign_up.dart';
 import 'package:lune/services/auth/sign_up_or_login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: firstLaunch ? const IntroductionPage() : const LoginOrSignUp(),
+      home: firstLaunch ? const IntroductionPage() : const AuthPage(),
       routes: {
         '/signUpOrLogin' :(context) => const SignUpOrLogin()
       },

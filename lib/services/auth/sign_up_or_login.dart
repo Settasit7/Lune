@@ -3,9 +3,7 @@ import 'package:lune/pages/login_page.dart';
 import 'package:lune/pages/sign_up_page.dart';
 
 class SignUpOrLogin extends StatefulWidget {
-  const SignUpOrLogin({
-    super.key
-  });
+  const SignUpOrLogin({super.key});
 
   @override
   State<SignUpOrLogin> createState() => _SignUpOrLoginState();
