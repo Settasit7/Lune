@@ -1,3 +1,7 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:lune/components/my_button.dart';
 import 'package:lune/components/my_text_field.dart';
@@ -14,12 +18,42 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
+  final emailTextController = TextEditingController();
+  final passwordTextController = TextEditingController();
+  final confirmPasswordTextController = TextEditingController();
 
-  void signUp() {
+  void signUp() async {
+    showDialog(
+      context: context,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(),
+      )
+    );
+    if (passwordTextController.text != confirmPasswordTextController.text) {
+      Navigator.pop(context);
+      displayMessage("Password don't match!");
+      return;
+    }
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailTextController.text,
+        password: passwordTextController.text
+      );
+      if (context.mounted) {
+        Navigator.pop(context);
+      }
+    } on FirebaseAuthException catch (e) {
+      displayMessage(e.code);
+    }
+  }
 
+  void displayMessage(String message) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(message),
+      )
+    );
   }
 
   @override
@@ -54,7 +88,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 const SizedBox(height: 25),
           
                 MyTextField(
-                  controller: emailController,
+                  controller: emailTextController,
                   hintText: 'Email',
                   obscureText: false,
                 ),
@@ -62,7 +96,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 const SizedBox(height: 10),
 
                 MyTextField(
-                  controller: passwordController,
+                  controller: passwordTextController,
                   hintText: 'Password',
                   obscureText: true,
                 ),
@@ -70,7 +104,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 const SizedBox(height: 10),
 
                 MyTextField(
-                  controller: confirmPasswordController,
+                  controller: confirmPasswordTextController,
                   hintText: 'Confirm password',
                   obscureText: true,
                 ),
