@@ -12,21 +12,24 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   final currentUser = FirebaseAuth.instance.currentUser!;
   final textController = TextEditingController();
 
   void logOut() {
     FirebaseAuth.instance.signOut();
   }
+
   void postMessage() {
     if (textController.text.isNotEmpty) {
       FirebaseFirestore.instance.collection("User Posts").add({
         "UserEmail": currentUser.email,
         "Message": textController.text,
-        "TimeStamp": Timestamp.now()
+        "TimeStamp": Timestamp.now(),
       });
     }
+    setState(() {
+      textController.clear();
+    });
   }
 
   @override
@@ -37,16 +40,16 @@ class _HomePageState extends State<HomePage> {
         title: const Text(
           "The Wall",
           style: TextStyle(
-            color: Colors.red
+            color: Colors.red,
           ),
         ),
         backgroundColor: Colors.grey[900],
         actions: [
           IconButton(
             onPressed: logOut,
-            icon: const Icon(Icons.logout)
-          )
-        ]
+            icon: const Icon(Icons.logout),
+          ),
+        ],
       ),
       body: Center(
         child: Column(
@@ -57,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                   .collection("User Posts")
                   .orderBy(
                     "TimeStamp",
-                    descending: false
+                    descending: false,
                   )
                   .snapshots(),
                 builder: (context, snapshot) {
@@ -68,19 +71,19 @@ class _HomePageState extends State<HomePage> {
                         final post = snapshot.data!.docs[index];
                         return WallPost(
                           message: post["Message"],
-                          user: post["UserEmail"]
+                          user: post["UserEmail"],
                         );
-                      }
+                      },
                     );
                   } else if (snapshot.hasError) {
                     return Center(
-                      child: Text("Error: ${snapshot.error}")
+                      child: Text("Error: ${snapshot.error}"),
                     );
                   }
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
-                }
+                },
               ),
             ),
             Padding(
@@ -92,19 +95,25 @@ class _HomePageState extends State<HomePage> {
                       controller: textController,
                       hintText: "Write something on the wall",
                       obscureText: false,
-                    )
+                    ),
                   ),
                   IconButton(
                     onPressed: postMessage,
-                    icon: const Icon(Icons.arrow_circle_up)
-                  )
-                ]
+                    icon: const Icon(Icons.arrow_circle_up),
+                  ),
+                ],
               ),
             ),
-            Text("Logged in as: " + currentUser.email!)
-          ]
-        )
-      )
+            Text(
+              "Logged in as: ${currentUser.email!}",
+              style: const TextStyle(color: Colors.grey),
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+          ],
+        ),
+      ),
     );
-  } 
+  }
 }

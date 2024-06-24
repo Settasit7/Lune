@@ -7,6 +7,7 @@ import 'package:lune/components/my_text_field.dart';
 
 class LoginPage extends StatefulWidget {
   final void Function()? onTap;
+  
   const LoginPage({
     super.key,
     this.onTap,
@@ -25,16 +26,14 @@ class _LoginPageState extends State<LoginPage> {
       context: context,
       builder: (context) => const Center(
         child: CircularProgressIndicator(),
-      )
+      ),
     );
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailTextController.text,
-        password: passwordTextController.text
+        password: passwordTextController.text,
       );
-      if (context.mounted) {
-        Navigator.pop(context);
-      }
+      if (context.mounted) Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
       displayMessage(e.code);
@@ -46,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
       context: context,
       builder: (context) => AlertDialog(
         title: Text(message),
-      )
+      ),
     );
   }
 
@@ -61,49 +60,37 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-
                 const SizedBox(height: 50),
-                
                 Icon(
                   Icons.message,
                   size: 100,
                   color: Colors.grey[800],
                 ),
-
                 const SizedBox(height: 50),
-          
                 const Text(
                   'Welcome back',
                   style: TextStyle(
                     fontSize: 16,
                   ),
                 ),
-
                 const SizedBox(height: 25),
-          
                 MyTextField(
                   controller: emailTextController,
                   hintText: 'Email',
                   obscureText: false,
                 ),
-
                 const SizedBox(height: 10),
-
                 MyTextField(
                   controller: passwordTextController,
                   hintText: 'Password',
                   obscureText: true,
                 ),
-
                 const SizedBox(height: 25),
-
                 MyButton(
                   onTap: login,
                   text: 'Login',
                 ),
-
                 const SizedBox(height: 50),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

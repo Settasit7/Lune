@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final List<PageViewModel> pages = [
   PageViewModel(
@@ -8,10 +8,17 @@ final List<PageViewModel> pages = [
     body: "This is a simple introduction screen example",
     // image: Image.asset("assets/intro_image1.png"),
     decoration: const PageDecoration(
-      pageColor: Colors.blue,
+      pageColor: Colors.red,
     ),
   ),
-  // Add more pages as needed
+  PageViewModel(
+    title: "Welcome to MyApp",
+    body: "This is a simple introduction screen example",
+    // image: Image.asset("assets/intro_image1.png"),
+    decoration: const PageDecoration(
+      pageColor: Colors.white,
+    ),
+  ),
   PageViewModel(
     title: "Welcome to MyApp",
     body: "This is a simple introduction screen example",
@@ -20,16 +27,6 @@ final List<PageViewModel> pages = [
       pageColor: Colors.blue,
     ),
   ),
-  // Add more pages as needed
-  PageViewModel(
-    title: "Welcome to MyApp",
-    body: "This is a simple introduction screen example",
-    // image: Image.asset("assets/intro_image1.png"),
-    decoration: const PageDecoration(
-      pageColor: Colors.blue,
-    ),
-  ),
-  // Add more pages as needed
 ];
 
 class IntroductionPage extends StatelessWidget {

@@ -1,13 +1,13 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:lune/components/my_button.dart';
 import 'package:lune/components/my_text_field.dart';
 
 class SignUpPage extends StatefulWidget {
   final void Function()? onTap;
+  
   const SignUpPage({
     super.key,
     this.onTap,
@@ -27,7 +27,7 @@ class _SignUpPageState extends State<SignUpPage> {
       context: context,
       builder: (context) => const Center(
         child: CircularProgressIndicator(),
-      )
+      ),
     );
     if (passwordTextController.text != confirmPasswordTextController.text) {
       Navigator.pop(context);
@@ -37,12 +37,11 @@ class _SignUpPageState extends State<SignUpPage> {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailTextController.text,
-        password: passwordTextController.text
+        password: passwordTextController.text,
       );
-      if (context.mounted) {
-        Navigator.pop(context);
-      }
+      if (context.mounted) Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
       displayMessage(e.code);
     }
   }
@@ -52,7 +51,7 @@ class _SignUpPageState extends State<SignUpPage> {
       context: context,
       builder: (context) => AlertDialog(
         title: Text(message),
-      )
+      ),
     );
   }
 
@@ -67,57 +66,43 @@ class _SignUpPageState extends State<SignUpPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-
                 const SizedBox(height: 50),
-                
                 Icon(
                   Icons.message,
                   size: 100,
                   color: Colors.grey[800],
                 ),
-
                 const SizedBox(height: 50),
-          
                 const Text(
                   'Sign up',
                   style: TextStyle(
                     fontSize: 16,
                   ),
                 ),
-
                 const SizedBox(height: 25),
-          
                 MyTextField(
                   controller: emailTextController,
                   hintText: 'Email',
                   obscureText: false,
                 ),
-
                 const SizedBox(height: 10),
-
                 MyTextField(
                   controller: passwordTextController,
                   hintText: 'Password',
                   obscureText: true,
                 ),
-
                 const SizedBox(height: 10),
-
                 MyTextField(
                   controller: confirmPasswordTextController,
                   hintText: 'Confirm password',
                   obscureText: true,
                 ),
-
                 const SizedBox(height: 25),
-
                 MyButton(
                   onTap: signUp,
                   text: 'Sign up',
                 ),
-
                 const SizedBox(height: 50),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

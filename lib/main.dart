@@ -1,12 +1,11 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:lune/firebase_options.dart';
 import 'package:lune/pages/introduction_page.dart';
 import 'package:lune/services/auth/auth.dart';
-import 'package:lune/services/auth/login_or_sign_up.dart';
 import 'package:lune/services/auth/sign_up_or_login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
 
 Future<bool> isFirstLaunch() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -30,9 +29,10 @@ Future main() async {
 
 class MyApp extends StatelessWidget {
   final bool firstLaunch;
+
   const MyApp({
     super.key,
-    required this.firstLaunch
+    required this.firstLaunch,
   });
 
   @override
@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: firstLaunch ? const IntroductionPage() : const AuthPage(),
       routes: {
-        '/signUpOrLogin' :(context) => const SignUpOrLogin()
+        '/signUpOrLogin': (context) => const SignUpOrLogin(),
       },
     );
   }
