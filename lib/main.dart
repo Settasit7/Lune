@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:lune/firebase_options.dart';
 import 'package:lune/pages/introduction_page.dart';
 import 'package:lune/services/auth/auth.dart';
-import 'package:lune/services/auth/sign_up_or_login.dart';
+import 'package:lune/services/auth/new_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<bool> isFirstLaunch() async {
@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: firstLaunch ? const IntroductionPage() : const AuthPage(),
       routes: {
-        '/signUpOrLogin': (context) => const SignUpOrLogin(),
+        '/newAuthPage': (context) => const NewAuthPage(),
       },
     );
   }
