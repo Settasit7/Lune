@@ -21,10 +21,10 @@ class _HomePageState extends State<HomePage> {
 
   void postMessage() {
     if (textController.text.isNotEmpty) {
-      FirebaseFirestore.instance.collection("User Posts").add({
-        "UserEmail": currentUser.email,
-        "Message": textController.text,
-        "TimeStamp": Timestamp.now(),
+      FirebaseFirestore.instance.collection('User Posts').add({
+        'UserEmail': currentUser.email,
+        'Message': textController.text,
+        'TimeStamp': Timestamp.now(),
       });
     }
     setState(() {
@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
         title: const Text(
-          "The Wall",
+          'The Wall',
           style: TextStyle(
             color: Colors.red,
           ),
@@ -57,9 +57,9 @@ class _HomePageState extends State<HomePage> {
             Expanded(
               child: StreamBuilder(
                 stream: FirebaseFirestore.instance
-                  .collection("User Posts")
+                  .collection('User Posts')
                   .orderBy(
-                    "TimeStamp",
+                    'TimeStamp',
                     descending: false,
                   )
                   .snapshots(),
@@ -70,14 +70,14 @@ class _HomePageState extends State<HomePage> {
                       itemBuilder: (context, index) {
                         final post = snapshot.data!.docs[index];
                         return WallPost(
-                          message: post["Message"],
-                          user: post["UserEmail"],
+                          message: post['Message'],
+                          user: post['UserEmail'],
                         );
                       },
                     );
                   } else if (snapshot.hasError) {
                     return Center(
-                      child: Text("Error: ${snapshot.error}"),
+                      child: Text('Error: ${snapshot.error}'),
                     );
                   }
                   return const Center(
@@ -93,7 +93,7 @@ class _HomePageState extends State<HomePage> {
                   Expanded(
                     child: MyTextField(
                       controller: textController,
-                      hintText: "Write something on the wall",
+                      hintText: 'Write something on the wall',
                       obscureText: false,
                     ),
                   ),
@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Text(
-              "Logged in as: ${currentUser.email!}",
+              'Logged in as: ${currentUser.email!}',
               style: const TextStyle(color: Colors.grey),
             ),
             const SizedBox(

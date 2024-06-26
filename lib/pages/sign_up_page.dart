@@ -1,17 +1,10 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lune/components/my_button.dart';
 import 'package:lune/components/my_text_field.dart';
 
 class SignUpPage extends StatefulWidget {
-  final void Function()? onTap;
-  
-  const SignUpPage({
-    super.key,
-    this.onTap,
-  });
+  const SignUpPage({super.key});
 
   @override
   State<SignUpPage> createState() => _SignUpPageState();
@@ -31,7 +24,7 @@ class _SignUpPageState extends State<SignUpPage> {
     );
     if (passwordTextController.text != confirmPasswordTextController.text) {
       Navigator.pop(context);
-      displayMessage("Password don't match!");
+      displayMessage('Password does not match!');
       return;
     }
     try {
@@ -39,7 +32,11 @@ class _SignUpPageState extends State<SignUpPage> {
         email: emailTextController.text,
         password: passwordTextController.text,
       );
-      if (context.mounted) Navigator.pop(context);
+      await FirebaseAuth.instance.currentUser?.sendEmailVerification();
+      if (context.mounted) {
+        Navigator.pop(context);
+        Navigator.pushNamed(context, '/verifyPage');
+      }
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
       displayMessage(e.code);
@@ -109,7 +106,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     const Text('Already have an account?'),
                     const SizedBox(width: 4),
                     GestureDetector(
-                      onTap: widget.onTap,
+                      onTap: () {
+                        Navigator.pushNamed(context, '/authPage');
+                      },
                       child: const Text(
                         'Login',
                         style: TextStyle(

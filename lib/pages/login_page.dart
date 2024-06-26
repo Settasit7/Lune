@@ -1,17 +1,10 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lune/components/my_button.dart';
 import 'package:lune/components/my_text_field.dart';
 
 class LoginPage extends StatefulWidget {
-  final void Function()? onTap;
-  
-  const LoginPage({
-    super.key,
-    this.onTap,
-  });
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -33,7 +26,10 @@ class _LoginPageState extends State<LoginPage> {
         email: emailTextController.text,
         password: passwordTextController.text,
       );
-      if (context.mounted) Navigator.pop(context);
+      if (context.mounted) {
+        Navigator.pop(context);
+        Navigator.pushNamed(context, '/authPage');
+      }
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
       displayMessage(e.code);
@@ -97,7 +93,9 @@ class _LoginPageState extends State<LoginPage> {
                     const Text('No account?'),
                     const SizedBox(width: 4),
                     GestureDetector(
-                      onTap: widget.onTap,
+                      onTap: () {
+                        Navigator.pushNamed(context, '/signUpPage');
+                      },
                       child: const Text(
                         'Sign up',
                         style: TextStyle(

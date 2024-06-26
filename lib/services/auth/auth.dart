@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lune/pages/home_page.dart';
-import 'package:lune/services/auth/login_or_sign_up.dart';
+import 'package:lune/pages/login_page.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
@@ -12,10 +12,10 @@ class AuthPage extends StatelessWidget {
       body: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
+          if (snapshot.hasData && FirebaseAuth.instance.currentUser!.emailVerified) {
             return const HomePage();
           } else {
-            return const LoginOrSignUp();
+            return const LoginPage();
           }
         },
       ),
