@@ -53,12 +53,12 @@ class IntroPage extends StatelessWidget {
       done: const Text('Done'),
       next: const Icon(Icons.arrow_forward),
       dotsDecorator: const DotsDecorator(
-        size: Size(10.0, 10.0),
+        size: Size(10, 10),
         color: Colors.white,
         activeColor: Colors.blue,
-        activeSize: Size(20.0, 10.0),
+        activeSize: Size(20, 10),
         activeShape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(25.0)),
+          borderRadius: BorderRadius.all(Radius.circular(25)),
         ),
       ),
     );
