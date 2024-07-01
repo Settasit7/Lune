@@ -12,7 +12,20 @@
           "package_name": "com.settasit.lune"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "267069975855-69svgagag6j5enmg36raklq05qt24g8a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.settasit.lune",
+            "certificate_hash": "febdf0de062e86d12612fa345af0aa81610646c4"
+          }
+        },
+        {
+          "client_id": "267069975855-latttfu2hqq1odigccce842oe6q1vgvj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCN0Xc1Tw8w0Zs6_FkbNtQjIlcN9OVchE4"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "267069975855-latttfu2hqq1odigccce842oe6q1vgvj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "267069975855-n9nss3lithmgo8s4743ioa38rm96s0r7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.settasit.lune"
+              }
+            }
+          ]
         }
       }
     }

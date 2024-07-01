@@ -43,6 +43,7 @@ dependencies:
   just_audio: ^0.9.36
   shared_preferences: ^2.2.2
   cloud_firestore: ^4.17.5
+  google_sign_in: ^6.2.1
 
 dev_dependencies:
   flutter_test:

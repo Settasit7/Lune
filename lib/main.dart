@@ -41,6 +41,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(fontFamily: 'FC Orbit Rounded'),
       home: firstLaunch ? const IntroPage() : const AuthPage(),
       routes: {
         '/authPage': (context) => const AuthPage(),

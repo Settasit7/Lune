@@ -40,13 +40,13 @@ class IntroPage extends StatelessWidget {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setBool('firstLaunch', false);
         if (!context.mounted) return;
-        Navigator.pushNamed(context, '/signUpPage');
+        Navigator.pushNamed(context, '/authPage');
       },
       onSkip: () async {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setBool('firstLaunch', false);
         if (!context.mounted) return;
-        Navigator.pushNamed(context, '/signUpPage');
+        Navigator.pushNamed(context, '/authPage');
       },
       showSkipButton: true,
       skip: const Text('Skip'),

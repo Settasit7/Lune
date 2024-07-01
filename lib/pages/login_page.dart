@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lune/components/my_button.dart';
 import 'package:lune/components/my_text_field.dart';
+import 'package:lune/services/auth/google_auth.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -85,6 +86,11 @@ class _LoginPageState extends State<LoginPage> {
                 MyButton(
                   onTap: login,
                   text: 'Login',
+                ),
+                const SizedBox(height: 25),
+                const MyButton(
+                  onTap: signInWithGoogle,
+                  text: 'Google',
                 ),
                 const SizedBox(height: 50),
                 Row(
