@@ -22,12 +22,12 @@ class _VerifyPageState extends State<VerifyPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(height: 50),
-                MyButton(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/authPage');
-                  },
-                  text: 'I verified my email',
-                ),
+                // MyButton(
+                //   onTap: () {
+                //     Navigator.pushNamed(context, '/authPage');
+                //   },
+                //   text: 'I verified my email',
+                // ),
                 const SizedBox(height: 50),
               ],
             ),

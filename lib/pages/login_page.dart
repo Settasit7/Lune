@@ -5,8 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lune/components/my_button.dart';
 import 'package:lune/components/my_text_field.dart';
-import 'package:lune/services/auth/apple_sign_in.dart';
-import 'package:lune/services/auth/google_sign_in.dart';
+import 'package:lune/services/auth/sign_in_with_apple.dart';
+import 'package:lune/services/auth/sign_in_with_google.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -56,8 +56,10 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    const backgroundColor = Color(0xFFE7ECEF);
+
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: backgroundColor,
       body: SafeArea(
         child: Center(
           child: Padding(
@@ -94,17 +96,20 @@ class _LoginPageState extends State<LoginPage> {
                 MyButton(
                   onTap: login,
                   text: 'Login',
+                  backgroundColor: backgroundColor,
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 25),
                 const MyButton(
-                  onTap: googleSignIn,
+                  onTap: signInWithGoogle,
                   text: 'Google',
+                  backgroundColor: backgroundColor,
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 25),
                 if (Platform.isIOS)
                 const MyButton(
-                  onTap: appleSignIn,
+                  onTap: signInWithApple,
                   text: 'Apple',
+                  backgroundColor: backgroundColor,
                 ),
                 const SizedBox(height: 50),
                 Row(

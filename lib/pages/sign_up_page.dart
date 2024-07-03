@@ -97,10 +97,10 @@ class _SignUpPageState extends State<SignUpPage> {
                   obscureText: true,
                 ),
                 const SizedBox(height: 25),
-                MyButton(
-                  onTap: signUp,
-                  text: 'Sign up',
-                ),
+                // MyButton(
+                //   onTap: signUp,
+                //   text: 'Sign up',
+                // ),
                 const SizedBox(height: 50),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
