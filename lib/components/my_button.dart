@@ -4,16 +4,15 @@ import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 class MyButton extends StatefulWidget {
   final void Function()? onTap;
   final String text;
-  final Color backgroundColor;
 
   const MyButton({
     super.key,
     required this.onTap,
     required this.text,
-    required this.backgroundColor,
   });
 
   @override
+  // ignore: library_private_types_in_public_api
   _MyButtonState createState() => _MyButtonState();
 }
 
@@ -22,8 +21,8 @@ class _MyButtonState extends State<MyButton> {
 
   @override
   Widget build(BuildContext context) {
-    Offset distance = isPressed ? const Offset(5, 5) : const Offset(8, 8);
-    double blur = isPressed ? 20 : 10;
+    Offset offset = isPressed ? const Offset(0, 0) : const Offset(8, 8);
+    double blurRadius = isPressed ? 0 : 8;
 
     return Listener(
       onPointerUp: (_) {
@@ -39,34 +38,32 @@ class _MyButtonState extends State<MyButton> {
           isPressed = true;
         });
       },
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 100),
-        padding: const EdgeInsets.all(25),
-        decoration: BoxDecoration(
-          color: widget.backgroundColor,
-          borderRadius: BorderRadius.circular(9),
-          boxShadow: [
-            BoxShadow(
-              blurRadius: blur,
-              offset: -distance,
-              color: const Color(0xFFFFFFFF),
-              inset: isPressed,
-            ),
-            BoxShadow(
-              blurRadius: blur,
-              offset: distance,
-              color: const Color(0xFFA7A9AF),
-              inset: isPressed,
-            ),
-          ],
-        ),
-        child: Center(
-          child: Text(
-            widget.text,
-            style: const TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
+      child: SizedBox(
+        height: 64,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 64),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.surface,
+            borderRadius: BorderRadius.circular(256),
+            boxShadow: [
+              BoxShadow(
+                blurRadius: blurRadius,
+                offset: -offset,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              BoxShadow(
+                blurRadius: blurRadius,
+                offset: offset,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+            ],
+          ),
+          child: Center(
+            child: Text(
+              widget.text,
+              style: const TextStyle(
+                fontSize: 16,
+              ),
             ),
           ),
         ),

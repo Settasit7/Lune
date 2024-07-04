@@ -8,5 +8,6 @@ Future<UserCredential> signInWithGoogle() async {
     accessToken: googleAuth?.accessToken,
     idToken: googleAuth?.idToken,
   );
+  
   return await FirebaseAuth.instance.signInWithCredential(credential);
 }

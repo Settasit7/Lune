@@ -13,5 +13,6 @@ Future<UserCredential> signInWithApple() async {
     idToken: appleCredential.identityToken,
     accessToken: appleCredential.authorizationCode,
   );
+
   return await FirebaseAuth.instance.signInWithCredential(credential);
 }

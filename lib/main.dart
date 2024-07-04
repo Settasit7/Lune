@@ -7,6 +7,8 @@ import 'package:lune/pages/login_page.dart';
 import 'package:lune/pages/sign_up_page.dart';
 import 'package:lune/pages/verify_page.dart';
 import 'package:lune/services/auth/auth.dart';
+import 'package:lune/themes/dark_theme.dart';
+import 'package:lune/themes/light_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<bool> isFirstLaunch() async {
@@ -41,7 +43,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: 'FC Orbit Rounded'),
+      theme: lightTheme,
+      darkTheme: darkTheme,
       home: firstLaunch ? const IntroPage() : const AuthPage(),
       routes: {
         '/authPage': (context) => const AuthPage(),

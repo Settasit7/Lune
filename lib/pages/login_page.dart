@@ -56,62 +56,80 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    const backgroundColor = Color(0xFFE7ECEF);
-
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
+            padding: const EdgeInsets.symmetric(horizontal: 32),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 50),
+                const SizedBox(height: 32),
                 Icon(
                   Icons.message,
-                  size: 100,
-                  color: Colors.grey[800],
+                  color: Theme.of(context).colorScheme.onInverseSurface,
+                  size: 128,
                 ),
-                const SizedBox(height: 50),
+                const SizedBox(height: 32),
                 const Text(
-                  'Welcome back',
+                  'Login',
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 32,
                   ),
                 ),
-                const SizedBox(height: 25),
+                const SizedBox(height: 32),
                 MyTextField(
                   controller: emailTextController,
                   hintText: 'Email',
                   obscureText: false,
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 8),
                 MyTextField(
                   controller: passwordTextController,
                   hintText: 'Password',
                   obscureText: true,
                 ),
-                const SizedBox(height: 25),
+                const SizedBox(height: 16),
                 MyButton(
                   onTap: login,
                   text: 'Login',
-                  backgroundColor: backgroundColor,
                 ),
-                const SizedBox(height: 25),
-                const MyButton(
-                  onTap: signInWithGoogle,
-                  text: 'Google',
-                  backgroundColor: backgroundColor,
+                const SizedBox(height: 64),
+                const Text(
+                  'Or sign in with',
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
                 ),
-                const SizedBox(height: 25),
-                if (Platform.isIOS)
-                const MyButton(
-                  onTap: signInWithApple,
-                  text: 'Apple',
-                  backgroundColor: backgroundColor,
+                const SizedBox(height: 32),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Expanded(
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: MyButton(
+                          onTap: signInWithGoogle,
+                          text: 'Google',
+                        ),
+                      ),
+                    ),
+                    if (Platform.isIOS)
+                      const SizedBox(width: 16),
+                    if (Platform.isIOS)
+                      const Expanded(
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: MyButton(
+                            onTap: signInWithApple,
+                            text: 'Apple',
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
-                const SizedBox(height: 50),
+                const SizedBox(height: 64),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -121,10 +139,10 @@ class _LoginPageState extends State<LoginPage> {
                       onTap: () {
                         Navigator.pushNamed(context, '/signUpPage');
                       },
-                      child: const Text(
+                      child: Text(
                         'Sign up',
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.onInverseSurface,
                         ),
                       ),
                     ),
