@@ -60,124 +60,133 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
         child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 44),
-            child: Column(
-              children: [
-                const SizedBox(height: 64),
-                Image.asset('assets/images/coffee_cup.png'),
-                const SizedBox(height: 16),
-                const Text(
-                  'Lune',
-                  style: TextStyle(
-                    fontSize: 44,
-                  ),
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 44),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(
+                  maxWidth: 342,
                 ),
-                const SizedBox(height: 24),
-                MyTextField(
-                  controller: emailTextController,
-                  hintText: 'Email',
-                  obscureText: false,
-                ),
-                const SizedBox(height: 8),
-                MyTextField(
-                  controller: passwordTextController,
-                  hintText: 'Password',
-                  obscureText: true,
-                ),
-                const SizedBox(height: 16),
-                MyButton(
-                  onTap: logIn,
-                  icon: null,
-                  text: 'Log in',
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/forgotPage');
-                      },
-                      child: Text(
-                        'Forgot password',
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 4),
-                  ],
-                ),
-                const SizedBox(height: 68),
-                Row(
-                  children: <Widget>[
-                      Expanded(
-                          child: Divider(
-                            color: Theme.of(context).colorScheme.onSurface,
-                          ),
-                      ),
-                      const SizedBox(width: 8),
-                      const Text("or sign in with"),      
-                      const SizedBox(width: 8),  
-                      Expanded(
-                          child: Divider(
-                            color: Theme.of(context).colorScheme.onSurface,
-                          ),
-                      ),
-                  ]
-                ),
-                const SizedBox(height: 32),
-                Row(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Expanded(
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: MyButton(
-                          onTap: signInWithGoogle,
-                          icon: 'assets/images/google_icon.png',
-                          text: 'Google',
-                        ),
+                    const SizedBox(height: 68),
+                    Image.asset('assets/images/coffee_cup.png'),
+                    const Text(
+                      'Lune',
+                      style: TextStyle(
+                        fontSize: 44,
                       ),
                     ),
-                    if (Platform.isIOS) ...[
-                      const SizedBox(width: 16),
-                      const Expanded(
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: MyButton(
-                            onTap: signInWithApple,
-                            icon: 'assets/images/apple_icon.png',
-                            text: 'Apple',
+                    const SizedBox(height: 32),
+                    MyTextField(
+                      controller: emailTextController,
+                      hintText: 'Email',
+                      obscureText: false,
+                    ),
+                    const SizedBox(height: 8),
+                    MyTextField(
+                      controller: passwordTextController,
+                      hintText: 'Password',
+                      obscureText: true,
+                    ),
+                    const SizedBox(height: 16),
+                    MyButton(
+                      onTap: logIn,
+                      icon: null,
+                      text: 'Log in',
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/forgotPage');
+                          },
+                          child: Text(
+                            'Forgot password',
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
                           ),
                         ),
-                      ),
-                    ]
-                  ],
-                ),
-                const SizedBox(height: 56),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text('Don\'t have an account?'),
-                    const SizedBox(width: 4),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/signUpPage');
-                      },
-                      child: Text(
-                        'Sign up',
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      ),
+                        const SizedBox(width: 4),
+                      ],
                     ),
+                    const SizedBox(height: 64),
+                    Row(
+                      children: <Widget>[
+                          Expanded(
+                              child: Divider(
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                          ),
+                          const SizedBox(width: 8),
+                          const Text("or sign in with"),      
+                          const SizedBox(width: 8),  
+                          Expanded(
+                              child: Divider(
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                          ),
+                      ]
+                    ),
+                    const SizedBox(height: 32),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Expanded(
+                          child: SizedBox(
+                            width: double.infinity,
+                            child: MyButton(
+                              onTap: signInWithGoogle,
+                              icon: 'assets/images/google_icon.png',
+                              text: 'Google',
+                            ),
+                          ),
+                        ),
+                        if (Platform.isIOS) ...[
+                          const SizedBox(width: 16),
+                          const Expanded(
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: MyButton(
+                                onTap: signInWithApple,
+                                icon: 'assets/images/apple_icon.png',
+                                text: 'Apple',
+                              ),
+                            ),
+                          ),
+                        ]
+                      ],
+                    ),
+                    const SizedBox(height: 64),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('Don\'t have an account?'),
+                        const SizedBox(width: 4),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/signUpPage');
+                          },
+                          child: Text(
+                            'Sign up',
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 32),
                   ],
                 ),
-              ],
+              ),
             ),
           ),
+          
         ),
       ),
     );
