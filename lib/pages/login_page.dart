@@ -19,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
 
-  void login() async {
+  void logIn() async {
     showDialog(
       context: context,
       builder: (context) => const Center(
@@ -61,24 +61,19 @@ class _LoginPageState extends State<LoginPage> {
       body: SafeArea(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32),
+            padding: const EdgeInsets.symmetric(horizontal: 44),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 32),
-                Icon(
-                  Icons.message,
-                  color: Theme.of(context).colorScheme.onInverseSurface,
-                  size: 128,
-                ),
-                const SizedBox(height: 32),
+                const SizedBox(height: 64),
+                Image.asset('assets/images/coffee_cup.png'),
+                const SizedBox(height: 16),
                 const Text(
-                  'Login',
+                  'Lune',
                   style: TextStyle(
-                    fontSize: 32,
+                    fontSize: 44,
                   ),
                 ),
-                const SizedBox(height: 32),
+                const SizedBox(height: 24),
                 MyTextField(
                   controller: emailTextController,
                   hintText: 'Email',
@@ -92,15 +87,45 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 16),
                 MyButton(
-                  onTap: login,
-                  text: 'Login',
+                  onTap: logIn,
+                  icon: null,
+                  text: 'Log in',
                 ),
-                const SizedBox(height: 64),
-                const Text(
-                  'Or sign in with',
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
+                const SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/forgotPage');
+                      },
+                      child: Text(
+                        'Forgot password',
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                  ],
+                ),
+                const SizedBox(height: 68),
+                Row(
+                  children: <Widget>[
+                      Expanded(
+                          child: Divider(
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
+                      ),
+                      const SizedBox(width: 8),
+                      const Text("or sign in with"),      
+                      const SizedBox(width: 8),  
+                      Expanded(
+                          child: Divider(
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
+                      ),
+                  ]
                 ),
                 const SizedBox(height: 32),
                 Row(
@@ -111,29 +136,31 @@ class _LoginPageState extends State<LoginPage> {
                         width: double.infinity,
                         child: MyButton(
                           onTap: signInWithGoogle,
+                          icon: 'assets/images/google_icon.png',
                           text: 'Google',
                         ),
                       ),
                     ),
-                    if (Platform.isIOS)
+                    if (Platform.isIOS) ...[
                       const SizedBox(width: 16),
-                    if (Platform.isIOS)
                       const Expanded(
                         child: SizedBox(
                           width: double.infinity,
                           child: MyButton(
                             onTap: signInWithApple,
+                            icon: 'assets/images/apple_icon.png',
                             text: 'Apple',
                           ),
                         ),
                       ),
+                    ]
                   ],
                 ),
-                const SizedBox(height: 64),
+                const SizedBox(height: 56),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('No account?'),
+                    const Text('Don\'t have an account?'),
                     const SizedBox(width: 4),
                     GestureDetector(
                       onTap: () {
@@ -142,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: Text(
                         'Sign up',
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.onInverseSurface,
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                       ),
                     ),

@@ -3,11 +3,13 @@ import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 
 class MyButton extends StatefulWidget {
   final void Function()? onTap;
-  final String text;
+  final String? icon;
+  final String? text;
 
   const MyButton({
     super.key,
     required this.onTap,
+    required this.icon,
     required this.text,
   });
 
@@ -21,10 +23,15 @@ class _MyButtonState extends State<MyButton> {
 
   @override
   Widget build(BuildContext context) {
-    Offset offset = isPressed ? const Offset(0, 0) : const Offset(8, 8);
-    double blurRadius = isPressed ? 0 : 8;
+    final Offset offset = isPressed ? const Offset(4, 4) : const Offset(8, 8);
+    final double blurRadius = isPressed ? 4 : 8;
 
     return Listener(
+      onPointerDown: (_) {
+        setState(() {
+          isPressed = true;
+        });
+      },
       onPointerUp: (_) {
         setState(() {
           isPressed = false;
@@ -33,37 +40,47 @@ class _MyButtonState extends State<MyButton> {
           widget.onTap!();
         }
       },
-      onPointerDown: (_) {
-        setState(() {
-          isPressed = true;
-        });
-      },
       child: SizedBox(
         height: 64,
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 64),
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.surface,
-            borderRadius: BorderRadius.circular(256),
+            borderRadius: BorderRadius.circular(32),
             boxShadow: [
               BoxShadow(
-                blurRadius: blurRadius,
+                color: Theme.of(context).colorScheme.secondary,
                 offset: -offset,
-                color: Theme.of(context).colorScheme.primary,
+                blurRadius: blurRadius,
               ),
               BoxShadow(
-                blurRadius: blurRadius,
+                color: Theme.of(context).colorScheme.onSurface,
                 offset: offset,
-                color: Theme.of(context).colorScheme.secondary,
+                blurRadius: blurRadius,
               ),
             ],
           ),
+          duration: const Duration(milliseconds: 50),
           child: Center(
-            child: Text(
-              widget.text,
-              style: const TextStyle(
-                fontSize: 16,
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (widget.icon != null)
+                  Image.asset(
+                    widget.icon!,
+                    width: 24,
+                    height: 24,
+                  ),
+                if (widget.text != null) ...[
+                  if (widget.icon != null)
+                    const SizedBox(width: 12),
+                  Text(
+                    widget.text!,
+                    style: const TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                ]
+              ],
             ),
           ),
         ),

@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 
 ThemeData lightTheme = ThemeData(
   colorScheme: const ColorScheme.light(
-    surface: Color.fromARGB(255, 235, 240, 245),
-    onSurface: Color.fromARGB(255, 160, 166, 173),
-    primary: Color.fromARGB(255, 255, 255, 255),
-    secondary: Color.fromARGB(255, 200, 210, 220),
-    onInverseSurface: Color.fromARGB(255, 234, 141, 255),
+    surface: Color(0xfff9f5fb),
+    onSurface: Color(0xffb5b0b7),
+    primary: Color(0xffbe93d4),
+    secondary: Color(0xffffffff),
   ),
   fontFamily: 'FC Orbit Rounded',
 );
