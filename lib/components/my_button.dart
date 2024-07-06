@@ -53,7 +53,7 @@ class _MyButtonState extends State<MyButton> {
                 blurRadius: blurRadius,
               ),
               BoxShadow(
-                color: Theme.of(context).colorScheme.onSurface,
+                color: Theme.of(context).colorScheme.tertiary,
                 offset: offset,
                 blurRadius: blurRadius,
               ),

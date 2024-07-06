@@ -46,7 +46,7 @@ class _MyTextFieldState extends State<MyTextField> {
         borderRadius: BorderRadius.circular(32),
         boxShadow: [
           BoxShadow(
-            color: Theme.of(context).colorScheme.onSurface,
+            color: Theme.of(context).colorScheme.tertiary,
             offset: offset,
             blurRadius: blurRadius,
             inset: true,
