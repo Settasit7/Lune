@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:lune/components/my_button.dart';
 
-class VerifyPage extends StatefulWidget {
-  const VerifyPage({super.key});
+class PasswordResetPage extends StatefulWidget {
+  const PasswordResetPage({super.key});
 
   @override
-  State<VerifyPage> createState() => _VerifyPageState();
+  State<PasswordResetPage> createState() => _PasswordResetPageState();
 }
 
-class _VerifyPageState extends State<VerifyPage> {
+class _PasswordResetPageState extends State<PasswordResetPage> {
 
   @override
   Widget build(BuildContext context) {

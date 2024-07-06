@@ -29,8 +29,8 @@ final List<PageViewModel> pages = [
   ),
 ];
 
-class IntroPage extends StatelessWidget {
-  const IntroPage({super.key});
+class IntroductionPage extends StatelessWidget {
+  const IntroductionPage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -2,10 +2,10 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:lune/firebase_options.dart';
-import 'package:lune/pages/forgot_page.dart';
-import 'package:lune/pages/intro_page.dart';
+import 'package:lune/pages/email_verification_page.dart';
+import 'package:lune/pages/introduction_page.dart';
+import 'package:lune/pages/password_reset_page.dart';
 import 'package:lune/pages/sign_up_page.dart';
-import 'package:lune/pages/verify_page.dart';
 import 'package:lune/services/auth/auth.dart';
 import 'package:lune/themes/dark_theme.dart';
 import 'package:lune/themes/light_theme.dart';
@@ -44,15 +44,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       theme: lightTheme,
       darkTheme: darkTheme,
-      home: firstLaunch ? const IntroPage() : const AuthPage(),
+      home: firstLaunch ? const IntroductionPage() : const AuthPage(),
       routes: {
         '/authPage': (context) => const AuthPage(),
         '/signUpPage': (context) => const SignUpPage(),
-        '/verifyPage': (context) => const VerifyPage(),
-        '/forgotPage': (context) => const ForgotPage(),
+        '/emailVerificationPage': (context) => const EmailVerificationPage(),
+        '/passwordResetPage': (context) => const PasswordResetPage(),
       },
     );
   }

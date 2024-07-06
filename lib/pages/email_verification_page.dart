@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:lune/components/my_button.dart';
 
-class ForgotPage extends StatefulWidget {
-  const ForgotPage({super.key});
+class EmailVerificationPage extends StatefulWidget {
+  const EmailVerificationPage({super.key});
 
   @override
-  State<ForgotPage> createState() => _VerifyPageState();
+  State<EmailVerificationPage> createState() => _EmailVerificationPageState();
 }
 
-class _VerifyPageState extends State<ForgotPage> {
+class _EmailVerificationPageState extends State<EmailVerificationPage> {
 
   @override
   Widget build(BuildContext context) {

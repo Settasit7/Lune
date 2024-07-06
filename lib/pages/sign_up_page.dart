@@ -37,7 +37,7 @@ class _SignUpPageState extends State<SignUpPage> {
       await FirebaseAuth.instance.currentUser?.sendEmailVerification();
       if (context.mounted) {
         Navigator.pop(context);
-        Navigator.pushNamed(context, '/verifyPage');
+        Navigator.pushNamed(context, '/emailVerificationPage');
       }
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);

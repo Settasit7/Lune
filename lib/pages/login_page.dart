@@ -3,6 +3,7 @@
 import 'dart:io' show Platform;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:lune/components/custom_dialog.dart';
 import 'package:lune/components/my_button.dart';
 import 'package:lune/components/my_text_field.dart';
 import 'package:lune/services/auth/sign_in_with_apple.dart';
@@ -20,37 +21,43 @@ class _LoginPageState extends State<LoginPage> {
   final passwordTextController = TextEditingController();
 
   void logIn() async {
-    showDialog(
-      context: context,
-      builder: (context) => const Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailTextController.text,
-        password: passwordTextController.text,
+    if (emailTextController.text == '') {
+      displayMessage('invalid-email');
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) => const Center(
+          child: CircularProgressIndicator(),
+        ),
       );
-      if (context.mounted) {
+      try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailTextController.text,
+          password: passwordTextController.text,
+        );
+        if (context.mounted) {
+          Navigator.pop(context);
+          if (FirebaseAuth.instance.currentUser!.emailVerified) {
+            Navigator.pushNamed(context, '/authPage');
+          } else {
+            displayMessage('email-not-verified');
+          }
+        }
+      } on FirebaseAuthException catch (e) {
         Navigator.pop(context);
-        if (FirebaseAuth.instance.currentUser!.emailVerified) {
-          Navigator.pushNamed(context, '/authPage');
+        if (e.code == 'wrong-password') {
+          displayMessage('invalid-password');
         } else {
-          displayMessage("Go verify");
+          displayMessage(e.code);
         }
       }
-    } on FirebaseAuthException catch (e) {
-      Navigator.pop(context);
-      displayMessage(e.code);
     }
   }
 
   void displayMessage(String message) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(message),
-      ),
+      builder: (context) => CustomDialog(message: message),
     );
   }
 
@@ -102,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            Navigator.pushNamed(context, '/forgotPage');
+                            Navigator.pushNamed(context, '/passwordResetPage');
                           },
                           child: Text(
                             'Forgot password',
@@ -186,7 +193,6 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-          
         ),
       ),
     );
