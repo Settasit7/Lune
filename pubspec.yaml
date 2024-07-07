@@ -46,6 +46,7 @@ dependencies:
   just_audio: ^0.9.38
   shared_preferences: ^2.2.3
   sign_in_with_apple: ^6.1.1
+  url_launcher: ^6.3.0
 
 dev_dependencies:
   flutter_test:

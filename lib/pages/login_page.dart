@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
 
   void logIn() async {
     if (emailTextController.text == '') {
-      displayMessage('invalid-email');
+      displayMessage('missing-email');
     } else {
       showDialog(
         context: context,
@@ -75,7 +75,6 @@ class _LoginPageState extends State<LoginPage> {
                   maxWidth: 342,
                 ),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const SizedBox(height: 68),
                     Image.asset('assets/images/coffee_cup.png'),

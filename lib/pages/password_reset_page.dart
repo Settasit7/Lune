@@ -13,21 +13,21 @@ class _PasswordResetPageState extends State<PasswordResetPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
         child: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(height: 50),
-                // MyButton(
-                //   onTap: () {
-                //     Navigator.pushNamed(context, '/authPage');
-                //   },
-                //   text: 'I verified my email',
-                // ),
+                MyButton(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/authPage');
+                  },
+                  icon: null,
+                  text: 'I verified my email',
+                ),
                 const SizedBox(height: 50),
               ],
             ),
