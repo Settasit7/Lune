@@ -38,28 +38,25 @@ class _MyTextFieldState extends State<MyTextField> {
 
   @override
   Widget build(BuildContext context) {
-    final Offset offset = _focusNode.hasFocus ? const Offset(8, 8) : const Offset(4, 4);
-    final double blurRadius = _focusNode.hasFocus ? 16 : 8;
-
     return AnimatedContainer(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(32),
+        borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height * 0.034),
         boxShadow: [
           BoxShadow(
             color: Theme.of(context).colorScheme.tertiary,
-            offset: offset,
-            blurRadius: blurRadius,
+            offset: _focusNode.hasFocus ? Offset(MediaQuery.of(context).size.height * 0.008, MediaQuery.of(context).size.height * 0.008) : Offset(MediaQuery.of(context).size.height * 0.004, MediaQuery.of(context).size.height * 0.004),
+            blurRadius: _focusNode.hasFocus ? MediaQuery.of(context).size.height * 0.018 : MediaQuery.of(context).size.height * 0.008,
             inset: true,
           ),
           BoxShadow(
             color: Theme.of(context).colorScheme.secondary,
-            offset: -offset,
-            blurRadius: blurRadius,
+            offset: _focusNode.hasFocus ? Offset(-MediaQuery.of(context).size.height * 0.008, -MediaQuery.of(context).size.height * 0.008) : Offset(-MediaQuery.of(context).size.height * 0.004, -MediaQuery.of(context).size.height * 0.004),
+            blurRadius: _focusNode.hasFocus ? MediaQuery.of(context).size.height * 0.018 : MediaQuery.of(context).size.height * 0.008,
             inset: true,
           ),
         ],
       ),
-      height: 64,
+      height: MediaQuery.of(context).size.height * 0.068,
       duration: const Duration(milliseconds: 100),
       child: Center(
         child: TextField(
@@ -67,17 +64,15 @@ class _MyTextFieldState extends State<MyTextField> {
           focusNode: _focusNode,
           decoration: InputDecoration(
             hintText: widget.hintText,
-            hintStyle: TextStyle(
-              color: _focusNode.hasFocus ? Colors.transparent : Theme.of(context).colorScheme.onSurface,
-            ),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 32),
+            hintStyle: TextStyle(color: _focusNode.hasFocus ? Colors.transparent : Theme.of(context).colorScheme.onSurface),
+            contentPadding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.074),
             focusedBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.transparent),
-              borderRadius: BorderRadius.circular(32),
+              borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height * 0.034),
             ),
             enabledBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.transparent),
-              borderRadius: BorderRadius.circular(32),
+              borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height * 0.034),
             ),
           ),
           obscureText: widget.obscureText,

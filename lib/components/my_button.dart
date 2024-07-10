@@ -23,9 +23,6 @@ class _MyButtonState extends State<MyButton> {
 
   @override
   Widget build(BuildContext context) {
-    final Offset offset = isPressed ? const Offset(4, 4) : const Offset(8, 8);
-    final double blurRadius = isPressed ? 4 : 8;
-
     return Listener(
       onPointerDown: (_) {
         setState(() {
@@ -41,21 +38,21 @@ class _MyButtonState extends State<MyButton> {
         }
       },
       child: SizedBox(
-        height: 64,
+        height: MediaQuery.of(context).size.height * 0.068,
         child: AnimatedContainer(
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.surface,
-            borderRadius: BorderRadius.circular(32),
+            borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height * 0.034),
             boxShadow: [
               BoxShadow(
                 color: Theme.of(context).colorScheme.secondary,
-                offset: -offset,
-                blurRadius: blurRadius,
+                offset: isPressed ? Offset(-MediaQuery.of(context).size.height * 0.004, -MediaQuery.of(context).size.height * 0.004) : Offset(-MediaQuery.of(context).size.height * 0.008, -MediaQuery.of(context).size.height * 0.008),
+                blurRadius: isPressed ? MediaQuery.of(context).size.height * 0.004 : MediaQuery.of(context).size.height * 0.008,
               ),
               BoxShadow(
                 color: Theme.of(context).colorScheme.tertiary,
-                offset: offset,
-                blurRadius: blurRadius,
+                offset: isPressed ? Offset(MediaQuery.of(context).size.height * 0.004, MediaQuery.of(context).size.height * 0.004) : Offset(MediaQuery.of(context).size.height * 0.008, MediaQuery.of(context).size.height * 0.008),
+                blurRadius: isPressed ? MediaQuery.of(context).size.height * 0.004 : MediaQuery.of(context).size.height * 0.008,
               ),
             ],
           ),
@@ -67,17 +64,15 @@ class _MyButtonState extends State<MyButton> {
                 if (widget.icon != null)
                   Image.asset(
                     widget.icon!,
-                    width: 24,
-                    height: 24,
+                    width: MediaQuery.of(context).size.width * 0.056,
+                    height: MediaQuery.of(context).size.height * 0.026,
                   ),
                 if (widget.text != null) ...[
                   if (widget.icon != null)
-                    const SizedBox(width: 12),
+                    const SizedBox(width: 8),
                   Text(
                     widget.text!,
-                    style: const TextStyle(
-                      fontSize: 16,
-                    ),
+                    style: const TextStyle(fontSize: 16),
                   ),
                 ]
               ],

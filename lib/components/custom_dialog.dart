@@ -11,31 +11,31 @@ class CustomDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(32),
-      ),
+      backgroundColor: Colors.transparent,
       child: ConstrainedBox(
-        constraints: const BoxConstraints(
-          maxWidth: 280,
-          maxHeight: 280,
+        constraints: BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.width * 0.652,
+          maxHeight: MediaQuery.of(context).size.width * 0.652,
         ),
         child: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                    SizedBox(
-                      width: 216,
-                      height: 216,
-                      child: Image.asset('assets/images/aru_sticker.png'),
-                    ),
-                    const SizedBox(width: 16),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.502,
+                    height: MediaQuery.of(context).size.height * 0.232,
+                    child: Image.asset('assets/images/aru_sticker.png'),
+                  ),
+                  SizedBox(width: MediaQuery.of(context).size.width * 0.038),
                 ],
               ),
-              Text(message),
+              Text(
+                message,
+                style: const TextStyle(color: Colors.white),
+              ),
             ],
           ),
         ),
