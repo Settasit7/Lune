@@ -65,7 +65,7 @@ class _MyTextFieldState extends State<MyTextField> {
           decoration: InputDecoration(
             hintText: widget.hintText,
             hintStyle: TextStyle(color: _focusNode.hasFocus ? Colors.transparent : Theme.of(context).colorScheme.onSurface),
-            contentPadding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.074),
+            contentPadding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height * 0.034),
             focusedBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.transparent),
               borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height * 0.034),

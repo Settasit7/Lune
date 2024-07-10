@@ -76,18 +76,14 @@ class _SignUpPageState extends State<SignUpPage> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 44),
               child: ConstrainedBox(
-                constraints: const BoxConstraints(
-                  maxWidth: 342,
-                ),
+                constraints: const BoxConstraints(maxWidth: 342),
                 child: Column(
                   children: [
                     const SizedBox(height: 68),
                     Image.asset('assets/images/coffee_cup.png'),
                     const Text(
                       'Sign up',
-                      style: TextStyle(
-                        fontSize: 44,
-                      ),
+                      style: TextStyle(fontSize: 44),
                     ),
                     const SizedBox(height: 32),
                     MyTextField(
@@ -123,9 +119,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           onTap: _launchUrl,
                           child: Text(
                             'Terms of Services',
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
+                            style: TextStyle(color: Theme.of(context).colorScheme.primary),
                           ),
                         ),
                       ],
@@ -142,9 +136,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           },
                           child: Text(
                             'Log in',
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
+                            style: TextStyle(color: Theme.of(context).colorScheme.primary),
                           ),
                         ),
                       ],

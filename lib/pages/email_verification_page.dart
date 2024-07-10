@@ -49,9 +49,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 44),
               child: ConstrainedBox(
-                constraints: const BoxConstraints(
-                  maxWidth: 342,
-                ),
+                constraints: const BoxConstraints(maxWidth: 342),
                 child: Column(
                   children: [
                     const SizedBox(height: 28),
@@ -68,9 +66,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                     ),
                     const Text(
                       'Verification sent',
-                      style: TextStyle(
-                        fontSize: 40,
-                      ),
+                      style: TextStyle(fontSize: 40),
                     ),
                     const SizedBox(height: 16),
                     const Text(
@@ -95,9 +91,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                           onTap: resendEmail,
                           child: Text(
                             'Resend email',
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
+                            style: TextStyle(color: Theme.of(context).colorScheme.primary),
                           ),
                         ),
                       ],
