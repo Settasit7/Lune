@@ -21,16 +21,10 @@ class CustomDialog extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.502,
-                    height: MediaQuery.of(context).size.height * 0.232,
-                    child: Image.asset('assets/images/aru_sticker.png'),
-                  ),
-                  SizedBox(width: MediaQuery.of(context).size.width * 0.038),
-                ],
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.502,
+                height: MediaQuery.of(context).size.height * 0.232,
+                child: Image.asset('assets/images/aru_sticker.png'),
               ),
               Text(
                 message,
