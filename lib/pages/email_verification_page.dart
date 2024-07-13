@@ -65,9 +65,9 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                     'Verification sent',
                     style: TextStyle(fontSize: 24),
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.022),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.024),
                   const Text('Please do the following:\n\n1. See the verification email\n2. Click the link in the email\n3. Proceed to the login page'),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.036),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.038),
                   MyButton(
                     onTap: () {
                       Navigator.pushNamed(context, '/authPage');
