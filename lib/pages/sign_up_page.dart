@@ -111,10 +111,12 @@ class _SignUpPageState extends State<SignUpPage> {
                     icon: null,
                     text: 'Sign up',
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.018),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.198),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      const Text('See ->'),
+                      const SizedBox(width: 4),
                       GestureDetector(
                         onTap: _launchUrl,
                         child: Text(
@@ -124,7 +126,6 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ],
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.118),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

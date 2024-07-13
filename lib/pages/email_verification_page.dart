@@ -47,58 +47,51 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
         child: Center(
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 44),
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 342),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 28),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(width: 32),
-                        SizedBox(
-                          width: 310,
-                          height: 310,
-                          child: Image.asset('assets/images/shiroko_sticker.png'),
+              padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.102),
+              child: Column(
+                children: [
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.030),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.662,
+                        height: MediaQuery.of(context).size.height * 0.306,
+                        child: Image.asset('assets/images/shiroko_sticker.png'),
+                      ),
+                    ],
+                  ),
+                  const Text(
+                    'Verification sent',
+                    style: TextStyle(fontSize: 24),
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.022),
+                  const Text('Please do the following:\n\n1. See the verification email\n2. Click the link in the email\n3. Proceed to the login page'),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.036),
+                  MyButton(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/authPage');
+                    },
+                    icon: null,
+                    text: 'Proceed to the login page',
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.018),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('Didn\'t receive the email?'),
+                      const SizedBox(width: 4),
+                      GestureDetector(
+                        onTap: resendEmail,
+                        child: Text(
+                          'Resend',
+                          style: TextStyle(color: Theme.of(context).colorScheme.primary),
                         ),
-                      ],
-                    ),
-                    const Text(
-                      'Verification sent',
-                      style: TextStyle(fontSize: 24),
-                    ),
-                    const SizedBox(height: 16),
-                    const Text(
-                      'A verification link has been sent to your email. Click it, then proceed to login page.',
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 64),
-                    MyButton(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/authPage');
-                      },
-                      icon: null,
-                      text: 'Proceed to login page',
-                    ),
-                    const SizedBox(height: 16),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text('Didn\'t receive email?'),
-                        const SizedBox(width: 4),
-                        GestureDetector(
-                          onTap: resendEmail,
-                          child: Text(
-                            'Resend',
-                            style: TextStyle(color: Theme.of(context).colorScheme.primary),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 222),
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.222),
+                ],
               ),
             ),
           ),
