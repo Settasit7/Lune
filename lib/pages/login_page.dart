@@ -82,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                     'R@bbit',
                     style: TextStyle(fontSize: 44),
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.034),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.036),
                   MyTextField(
                     controller: emailTextController,
                     hintText: 'Email',
@@ -113,24 +113,23 @@ class _LoginPageState extends State<LoginPage> {
                           style: TextStyle(color: Theme.of(context).colorScheme.primary),
                         ),
                       ),
-                      SizedBox(width: MediaQuery.of(context).size.width * 0.008),
                     ],
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.068),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.060),
                   Row(
                     children: <Widget>[
                       Expanded(
                         child: Divider(color: Theme.of(context).colorScheme.onSurface),
                       ),
-                      SizedBox(width: MediaQuery.of(context).size.width * 0.018),
+                      const SizedBox(width: 16),
                       const Text("or sign in with"),      
-                      SizedBox(width: MediaQuery.of(context).size.width * 0.018),  
+                      const SizedBox(width: 16),  
                       Expanded(
                         child: Divider(color: Theme.of(context).colorScheme.onSurface),
                       ),
                     ]
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.034),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.036),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -145,7 +144,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       if (Platform.isIOS) ...[
-                        SizedBox(width: MediaQuery.of(context).size.width * 0.038),
+                        const SizedBox(width: 16),
                         const Expanded(
                           child: SizedBox(
                             width: double.infinity,
@@ -176,7 +175,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ],
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.014),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.018),
                 ],
               ),
             ),

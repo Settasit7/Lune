@@ -66,11 +66,11 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                     ),
                     const Text(
                       'Verification sent',
-                      style: TextStyle(fontSize: 40),
+                      style: TextStyle(fontSize: 24),
                     ),
                     const SizedBox(height: 16),
                     const Text(
-                      'A verification link has been sent to your email. Click the link, then proceed to the login page.',
+                      'A verification link has been sent to your email. Click it, then proceed to login page.',
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 64),
@@ -79,18 +79,18 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                         Navigator.pushNamed(context, '/authPage');
                       },
                       icon: null,
-                      text: 'Proceed to the login page',
+                      text: 'Proceed to login page',
                     ),
-                    const SizedBox(height: 18),
+                    const SizedBox(height: 16),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text('Didn\'t receive the email?'),
+                        const Text('Didn\'t receive email?'),
                         const SizedBox(width: 4),
                         GestureDetector(
                           onTap: resendEmail,
                           child: Text(
-                            'Resend email',
+                            'Resend',
                             style: TextStyle(color: Theme.of(context).colorScheme.primary),
                           ),
                         ),

@@ -74,76 +74,75 @@ class _SignUpPageState extends State<SignUpPage> {
         child: Center(
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 44),
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 342),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 68),
-                    Image.asset('assets/images/coffee_cup.png'),
-                    const Text(
-                      'Sign up',
-                      style: TextStyle(fontSize: 44),
-                    ),
-                    const SizedBox(height: 32),
-                    MyTextField(
-                      controller: emailTextController,
-                      hintText: 'Email',
-                      obscureText: false,
-                    ),
-                    const SizedBox(height: 8),
-                    MyTextField(
-                      controller: passwordTextController,
-                      hintText: 'Password',
-                      obscureText: true,
-                    ),
-                    const SizedBox(height: 8),
-                    MyTextField(
-                      controller: confirmPasswordTextController,
-                      hintText: 'Confirm password',
-                      obscureText: true,
-                    ),
-                    const SizedBox(height: 16),
-                    MyButton(
-                      onTap: signUp,
-                      icon: null,
-                      text: 'Sign up',
-                    ),
-                    const SizedBox(height: 18),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text('By signing up, you agree to'),
-                        const SizedBox(width: 4),
-                        GestureDetector(
-                          onTap: _launchUrl,
-                          child: Text(
-                            'Terms of Services',
-                            style: TextStyle(color: Theme.of(context).colorScheme.primary),
-                          ),
+              padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.102),
+              child: Column(
+                children: [
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.072),
+                  Image.asset(
+                    Theme.of(context).colorScheme.primary == const Color(0xffbe93d4) ? 'assets/images/rabbit_icon.png' : 'assets/images/rabbit_icon_dark.png',
+                    width: MediaQuery.of(context).size.width * 0.298,
+                    height: MediaQuery.of(context).size.height * 0.138,
+                  ),
+                  const Text(
+                    'Sign up',
+                    style: TextStyle(fontSize: 44),
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.036),
+                  MyTextField(
+                    controller: emailTextController,
+                    hintText: 'Email',
+                    obscureText: false,
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.008),
+                  MyTextField(
+                    controller: passwordTextController,
+                    hintText: 'Password',
+                    obscureText: true,
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.008),
+                  MyTextField(
+                    controller: confirmPasswordTextController,
+                    hintText: 'Confirm password',
+                    obscureText: true,
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.018),
+                  MyButton(
+                    onTap: signUp,
+                    icon: null,
+                    text: 'Sign up',
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.018),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      GestureDetector(
+                        onTap: _launchUrl,
+                        child: Text(
+                          'Terms of Service',
+                          style: TextStyle(color: Theme.of(context).colorScheme.primary),
                         ),
-                      ],
-                    ),
-                    const SizedBox(height: 170),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text('Have an account?'),
-                        const SizedBox(width: 4),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, '/authPage');
-                          },
-                          child: Text(
-                            'Log in',
-                            style: TextStyle(color: Theme.of(context).colorScheme.primary),
-                          ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.118),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('Have an account?'),
+                      const SizedBox(width: 4),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/authPage');
+                        },
+                        child: Text(
+                          'Log in',
+                          style: TextStyle(color: Theme.of(context).colorScheme.primary),
                         ),
-                      ],
-                    ),
-                    const SizedBox(height: 32),
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.018),
+                ],
               ),
             ),
           ),

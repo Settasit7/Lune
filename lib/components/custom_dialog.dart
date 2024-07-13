@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class CustomDialog extends StatelessWidget {
@@ -14,8 +16,14 @@ class CustomDialog extends StatelessWidget {
       backgroundColor: Colors.transparent,
       child: ConstrainedBox(
         constraints: BoxConstraints(
-          maxWidth: MediaQuery.of(context).size.width * 0.652,
-          maxHeight: MediaQuery.of(context).size.width * 0.652,
+          maxWidth: min(
+            MediaQuery.of(context).size.width * 0.652,
+            MediaQuery.of(context).size.height * 0.652,
+          ),
+          maxHeight: min(
+            MediaQuery.of(context).size.width * 0.652,
+            MediaQuery.of(context).size.height * 0.652,
+          ),
         ),
         child: Center(
           child: Column(

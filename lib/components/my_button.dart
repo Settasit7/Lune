@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 
@@ -64,8 +66,14 @@ class _MyButtonState extends State<MyButton> {
                 if (widget.icon != null)
                   Image.asset(
                     widget.icon!,
-                    width: MediaQuery.of(context).size.width * 0.056,
-                    height: MediaQuery.of(context).size.height * 0.026,
+                    width: min(
+                      MediaQuery.of(context).size.width * 0.056,
+                      MediaQuery.of(context).size.height * 0.026,
+                    ),
+                    height: min(
+                      MediaQuery.of(context).size.width * 0.056,
+                      MediaQuery.of(context).size.height * 0.026,
+                    ),
                   ),
                 if (widget.text != null) ...[
                   if (widget.icon != null)
