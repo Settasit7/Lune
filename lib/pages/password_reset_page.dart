@@ -17,22 +17,26 @@ class _PasswordResetPageState extends State<PasswordResetPage> {
   final emailTextController = TextEditingController();
 
   void sendPasswordResetEmail() async {
-    showDialog(
-      context: context,
-      builder: (context) => const Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
-    try {
-      await FirebaseAuth.instance.sendPasswordResetEmail(
-        email: emailTextController.text
+    if (emailTextController.text == '') {
+      displayMessage('missing-email');
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) => const Center(
+          child: CircularProgressIndicator(),
+        ),
       );
-      if (context.mounted) {
+      try {
+        await FirebaseAuth.instance.sendPasswordResetEmail(
+          email: emailTextController.text
+        );
+        if (context.mounted) {
+          Navigator.pop(context);
+        }
+      } on FirebaseAuthException catch (e) {
         Navigator.pop(context);
+        displayMessage(e.code);
       }
-    } on FirebaseAuthException catch (e) {
-      Navigator.pop(context);
-      displayMessage(e.code);
     }
   }
 
@@ -54,18 +58,21 @@ class _PasswordResetPageState extends State<PasswordResetPage> {
               padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.102),
               child: Column(
                 children: [
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.126),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.662,
-                    height: MediaQuery.of(context).size.height * 0.306,
-                    child: Image.asset('assets/images/chise_sticker.png'),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.072),
+                  Image.asset(
+                    Theme.of(context).colorScheme.primary == const Color(0xffbe93d4) ? 'assets/images/rabbit_icon.png' : 'assets/images/rabbit_icon_dark.png',
+                    width: MediaQuery.of(context).size.width * 0.298,
+                    height: MediaQuery.of(context).size.height * 0.138,
                   ),
                   const Text(
-                    'Change password',
-                    style: TextStyle(fontSize: 24),
+                    'Reset',
+                    style: TextStyle(fontSize: 44),
                   ),
-                  const Text('Please send link to your email'),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.040),
+                  const Text(
+                    'Password',
+                    style: TextStyle(fontSize: 25),
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.068),
                   MyTextField(
                     controller: emailTextController,
                     hintText: 'Email',
@@ -75,9 +82,9 @@ class _PasswordResetPageState extends State<PasswordResetPage> {
                   MyButton(
                     onTap: sendPasswordResetEmail,
                     icon: null,
-                    text: 'Send link',
+                    text: 'Send reset link',
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.160),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.300),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
