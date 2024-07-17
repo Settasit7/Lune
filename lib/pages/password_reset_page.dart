@@ -68,11 +68,14 @@ class _PasswordResetPageState extends State<PasswordResetPage> {
                     'Reset',
                     style: TextStyle(fontSize: 44),
                   ),
-                  const Text(
-                    'Password',
-                    style: TextStyle(fontSize: 25),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.068,
+                    child: const Text(
+                      'Password',
+                      style: TextStyle(fontSize: 25),
+                    ),
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.068),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.044),
                   MyTextField(
                     controller: emailTextController,
                     hintText: 'Email',
@@ -82,9 +85,12 @@ class _PasswordResetPageState extends State<PasswordResetPage> {
                   MyButton(
                     onTap: sendPasswordResetEmail,
                     icon: null,
-                    text: 'Send reset link',
+                    text: 'Send',
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.300),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.018),
+                  const Text(''),
+                  const Text(''),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.232),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -95,7 +101,7 @@ class _PasswordResetPageState extends State<PasswordResetPage> {
                           Navigator.pushNamed(context, '/authPage');
                         },
                         child: Text(
-                          'Login',
+                          'Log in',
                           style: TextStyle(color: Theme.of(context).colorScheme.primary),
                         ),
                       ),

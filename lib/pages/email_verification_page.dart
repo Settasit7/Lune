@@ -50,18 +50,29 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
               padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.102),
               child: Column(
                 children: [
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.126),
+                  const Text(
+                    '',
+                    style: TextStyle(fontSize: 44),
+                  ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.662,
                     height: MediaQuery.of(context).size.height * 0.306,
                     child: Image.asset('assets/images/shiroko_sticker.png'),
                   ),
-                  const Text(
-                    'Verification sent',
-                    style: TextStyle(fontSize: 24),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.084,
+                    child: const Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Text(
+                        'Verification sent',
+                        style: TextStyle(fontSize: 24),
+                      ),
+                    ),
                   ),
-                  const Text('Please see the verification email'),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.048),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.094,
+                    child: const Text('Please see the verification email'),
+                  ),
                   MyButton(
                     onTap: () {
                       Navigator.pushNamed(context, '/authPage');
@@ -84,7 +95,9 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                       ),
                     ],
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.238),
+                  const Text(''),
+                  const Text(''),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.174),
                 ],
               ),
             ),
