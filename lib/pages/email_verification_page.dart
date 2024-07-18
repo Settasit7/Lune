@@ -50,35 +50,29 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
               padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.102),
               child: Column(
                 children: [
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.072),
+                  Image.asset(
+                    Theme.of(context).colorScheme.primary == const Color(0xffbe93d4) ? 'assets/images/rabbit_icon.png' : 'assets/images/rabbit_icon_dark.png',
+                    width: MediaQuery.of(context).size.width * 0.298,
+                    height: MediaQuery.of(context).size.height * 0.138,
+                  ),
                   const Text(
-                    '',
+                    'Email',
                     style: TextStyle(fontSize: 44),
                   ),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.662,
-                    height: MediaQuery.of(context).size.height * 0.306,
-                    child: Image.asset('assets/images/shiroko_sticker.png'),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.084,
-                    child: const Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Text(
-                        'Verification sent',
-                        style: TextStyle(fontSize: 24),
-                      ),
+                    height: MediaQuery.of(context).size.height * 0.198,
+                    child: const Text(
+                      'Verification',
+                      style: TextStyle(fontSize: 19),
                     ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.094,
-                    child: const Text('Please see the verification email'),
                   ),
                   MyButton(
                     onTap: () {
                       Navigator.pushNamed(context, '/authPage');
                     },
                     icon: null,
-                    text: 'Proceed to the login page',
+                    text: 'I\'ve verified this email',
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.018),
                   Row(
@@ -97,7 +91,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                   ),
                   const Text(''),
                   const Text(''),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.174),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.250),
                 ],
               ),
             ),

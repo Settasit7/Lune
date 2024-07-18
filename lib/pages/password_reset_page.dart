@@ -69,13 +69,12 @@ class _PasswordResetPageState extends State<PasswordResetPage> {
                     style: TextStyle(fontSize: 44),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.068,
+                    height: MediaQuery.of(context).size.height * 0.112,
                     child: const Text(
                       'Password',
                       style: TextStyle(fontSize: 25),
                     ),
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.044),
                   MyTextField(
                     controller: emailTextController,
                     hintText: 'Email',
