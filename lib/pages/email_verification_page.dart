@@ -78,7 +78,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('Didn\'t receive the email?'),
+                      const Text('Didn\'t receive the link?'),
                       const SizedBox(width: 4),
                       GestureDetector(
                         onTap: resendEmail,
