@@ -72,7 +72,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                       Navigator.pushNamed(context, '/authPage');
                     },
                     icon: null,
-                    text: 'I\'ve verified this email',
+                    text: 'Yes, I\'ve clicked the link',
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.018),
                   Row(
