@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lune/components/custom_dialog.dart';
@@ -25,9 +23,11 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
     try {
       await FirebaseAuth.instance.currentUser?.sendEmailVerification();
       if (context.mounted) {
+        // ignore: use_build_context_synchronously
         Navigator.pop(context);
       }
     } on FirebaseAuthException catch (e) {
+      // ignore: use_build_context_synchronously
       Navigator.pop(context);
       displayMessage(e.code);
     }

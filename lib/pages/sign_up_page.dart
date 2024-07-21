@@ -1,6 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lune/components/custom_dialog.dart';
@@ -52,21 +49,18 @@ class _SignUpPageState extends State<SignUpPage> {
         );
         await FirebaseAuth.instance.currentUser?.sendEmailVerification();
         if (context.mounted) {
+          // ignore: use_build_context_synchronously
           Navigator.pop(context);
           Navigator.push(
+            // ignore: use_build_context_synchronously
             context,
             MaterialPageRoute(
               builder: (context) => const EmailVerificationPage(),
             )
           );
-
-          // FirebaseFirestore.instance.collection('Users').doc(FirebaseAuth.instance.currentUser!.uid).set({
-          //   'uid': FirebaseAuth.instance.currentUser!.uid,
-          //   'email': FirebaseAuth.instance.currentUser!.email,
-          // });
-
         }
       } on FirebaseAuthException catch (e) {
+        // ignore: use_build_context_synchronously
         Navigator.pop(context);
         displayMessage(e.code);
       }
