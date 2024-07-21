@@ -73,10 +73,13 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 children: [
                   SizedBox(height: MediaQuery.of(context).size.height * 0.072),
-                  Image.asset(
-                    Theme.of(context).colorScheme.primary == const Color(0xffbe93d4) ? 'assets/images/rabbit_icon.png' : 'assets/images/rabbit_icon_dark.png',
-                    width: MediaQuery.of(context).size.width * 0.298,
-                    height: MediaQuery.of(context).size.height * 0.138,
+                  Hero(
+                    tag: 'icon',
+                    child: Image.asset(
+                      Theme.of(context).colorScheme.primary == const Color(0xffbe93d4) ? 'assets/images/rabbit_icon.png' : 'assets/images/rabbit_icon_dark.png',
+                      width: MediaQuery.of(context).size.width * 0.298,
+                      height: MediaQuery.of(context).size.height * 0.138,
+                    ),
                   ),
                   const Text(
                     'R@bbit',
