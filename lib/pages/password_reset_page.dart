@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:lune/components/custom_dialog.dart';
 import 'package:lune/components/my_button.dart';
 import 'package:lune/components/my_text_field.dart';
+import 'package:lune/services/auth/auth.dart';
 
 class PasswordResetPage extends StatefulWidget {
   const PasswordResetPage({super.key});
@@ -100,7 +101,12 @@ class _PasswordResetPageState extends State<PasswordResetPage> {
                       const SizedBox(width: 4),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, '/authPage');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const AuthPage(),
+                            )
+                          );
                         },
                         child: Text(
                           'Log in',

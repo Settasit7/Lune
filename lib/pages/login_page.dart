@@ -1,11 +1,16 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:io' show Platform;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lune/components/custom_dialog.dart';
 import 'package:lune/components/my_button.dart';
 import 'package:lune/components/my_text_field.dart';
+import 'package:lune/pages/password_reset_page.dart';
+import 'package:lune/pages/profile_creation_page.dart';
+import 'package:lune/pages/sign_up_page.dart';
+import 'package:lune/services/auth/auth.dart';
 import 'package:lune/services/auth/sign_in_with_apple.dart';
 import 'package:lune/services/auth/sign_in_with_google.dart';
 
@@ -38,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
         if (context.mounted) {
           Navigator.pop(context);
           if (FirebaseAuth.instance.currentUser!.emailVerified) {
-            Navigator.pushNamed(context, '/authPage');
+            checkUserProfile(context);
           } else {
             displayMessage('email-not-verified');
           }
@@ -53,6 +58,27 @@ class _LoginPageState extends State<LoginPage> {
       }
     }
   }
+
+  void checkUserProfile(BuildContext context) async {
+  var userId = FirebaseAuth.instance.currentUser!.uid;
+  var userDoc = await FirebaseFirestore.instance.collection('Users').doc(userId).get();
+
+  if (!userDoc.exists) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const ProfileCreationPage(),
+      ),
+    );
+  } else {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const AuthPage(),
+      ),
+    );
+  }
+}
 
   void displayMessage(String message) {
     showDialog(
@@ -109,7 +135,12 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, '/passwordResetPage');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const PasswordResetPage(),
+                            )
+                          );
                         },
                         child: Text(
                           'Forgot password',
@@ -169,7 +200,12 @@ class _LoginPageState extends State<LoginPage> {
                       const SizedBox(width: 4),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, '/signUpPage');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const SignUpPage()
+                            )
+                          );
                         },
                         child: Text(
                           'Sign up',

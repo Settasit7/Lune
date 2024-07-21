@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:lune/services/auth/auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final List<PageViewModel> pages = [
@@ -40,13 +41,23 @@ class IntroductionPage extends StatelessWidget {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setBool('firstLaunch', false);
         if (!context.mounted) return;
-        Navigator.pushNamed(context, '/authPage');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const AuthPage(),
+          )
+        );
       },
       onSkip: () async {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setBool('firstLaunch', false);
         if (!context.mounted) return;
-        Navigator.pushNamed(context, '/authPage');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const AuthPage(),
+          )
+        );
       },
       showSkipButton: true,
       skip: const Text('Skip'),

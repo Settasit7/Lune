@@ -1,10 +1,13 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lune/components/custom_dialog.dart';
 import 'package:lune/components/my_button.dart';
 import 'package:lune/components/my_text_field.dart';
+import 'package:lune/pages/email_verification_page.dart';
+import 'package:lune/services/auth/auth.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 Future<void> _launchUrl() async {
@@ -50,7 +53,18 @@ class _SignUpPageState extends State<SignUpPage> {
         await FirebaseAuth.instance.currentUser?.sendEmailVerification();
         if (context.mounted) {
           Navigator.pop(context);
-          Navigator.pushNamed(context, '/emailVerificationPage');
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const EmailVerificationPage(),
+            )
+          );
+
+          // FirebaseFirestore.instance.collection('Users').doc(FirebaseAuth.instance.currentUser!.uid).set({
+          //   'uid': FirebaseAuth.instance.currentUser!.uid,
+          //   'email': FirebaseAuth.instance.currentUser!.email,
+          // });
+
         }
       } on FirebaseAuthException catch (e) {
         Navigator.pop(context);
@@ -141,7 +155,12 @@ class _SignUpPageState extends State<SignUpPage> {
                       const SizedBox(width: 4),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, '/authPage');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const AuthPage(),
+                            )
+                          );
                         },
                         child: Text(
                           'Log in',

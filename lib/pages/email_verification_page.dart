@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lune/components/custom_dialog.dart';
 import 'package:lune/components/my_button.dart';
+import 'package:lune/services/auth/auth.dart';
 
 class EmailVerificationPage extends StatefulWidget {
   const EmailVerificationPage({super.key});
@@ -72,7 +73,12 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                   ),
                   MyButton(
                     onTap: () {
-                      Navigator.pushNamed(context, '/authPage');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AuthPage(),
+                        )
+                      );
                     },
                     icon: null,
                     text: 'Yes, I\'ve clicked the link',
