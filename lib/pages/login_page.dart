@@ -18,12 +18,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final emailTextController = TextEditingController();
-  final passwordTextController = TextEditingController();
+  final _emailTextController = TextEditingController();
+  final _passwordTextController = TextEditingController();
 
-  void logIn() async {
-    if (emailTextController.text == '') {
-      displayMessage('missing-email');
+  void _logIn() async {
+    if (_emailTextController.text == '') {
+      _displayMessage('missing-email');
     } else {
       showDialog(
         context: context,
@@ -33,8 +33,8 @@ class _LoginPageState extends State<LoginPage> {
       );
       try {
         await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: emailTextController.text,
-          password: passwordTextController.text,
+          email: _emailTextController.text,
+          password: _passwordTextController.text,
         );
         if (context.mounted) {
           // ignore: use_build_context_synchronously
@@ -43,27 +43,25 @@ class _LoginPageState extends State<LoginPage> {
             Navigator.push(
               // ignore: use_build_context_synchronously
               context,
-              MaterialPageRoute(
-                builder: (context) => const AuthPage()
-              )
+              MaterialPageRoute(builder: (context) => const AuthPage()),
             );
           } else {
-            displayMessage('email-not-verified');
+            _displayMessage('email-not-verified');
           }
         }
       } on FirebaseAuthException catch (e) {
         // ignore: use_build_context_synchronously
         Navigator.pop(context);
         if (e.code == 'wrong-password') {
-          displayMessage('invalid-password');
+          _displayMessage('invalid-password');
         } else {
-          displayMessage(e.code);
+          _displayMessage(e.code);
         }
       }
     }
   }
 
-  void displayMessage(String message) {
+  void _displayMessage(String message) {
     showDialog(
       context: context,
       builder: (context) => CustomDialog(message: message),
@@ -96,19 +94,19 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.036),
                   MyTextField(
-                    controller: emailTextController,
+                    controller: _emailTextController,
                     hintText: 'Email',
                     obscureText: false,
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.008),
                   MyTextField(
-                    controller: passwordTextController,
+                    controller: _passwordTextController,
                     hintText: 'Password',
                     obscureText: true,
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.018),
                   MyButton(
-                    onTap: logIn,
+                    onTap: _logIn,
                     icon: null,
                     text: 'Log in',
                   ),
@@ -120,9 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => const PasswordResetPage(),
-                            )
+                            MaterialPageRoute(builder: (context) => const PasswordResetPage()),
                           );
                         },
                         child: Text(
@@ -185,9 +181,7 @@ class _LoginPageState extends State<LoginPage> {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => const SignUpPage()
-                            )
+                            MaterialPageRoute(builder: (context) => const SignUpPage()),
                           );
                         },
                         child: Text(

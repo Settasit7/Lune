@@ -43,9 +43,7 @@ class IntroductionPage extends StatelessWidget {
         if (!context.mounted) return;
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) => const AuthPage(),
-          )
+          MaterialPageRoute(builder: (context) => const AuthPage())
         );
       },
       onSkip: () async {
@@ -54,9 +52,7 @@ class IntroductionPage extends StatelessWidget {
         if (!context.mounted) return;
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) => const AuthPage(),
-          )
+          MaterialPageRoute(builder: (context) => const AuthPage())
         );
       },
       showSkipButton: true,

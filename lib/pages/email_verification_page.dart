@@ -13,7 +13,7 @@ class EmailVerificationPage extends StatefulWidget {
 
 class _EmailVerificationPageState extends State<EmailVerificationPage> {
 
-  void resendEmail() async {
+  void _resendEmail() async {
     showDialog(
       context: context,
       builder: (context) => const Center(
@@ -29,11 +29,11 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
     } on FirebaseAuthException catch (e) {
       // ignore: use_build_context_synchronously
       Navigator.pop(context);
-      displayMessage(e.code);
+      _displayMessage(e.code);
     }
   }
 
-  void displayMessage(String message) {
+  void _displayMessage(String message) {
     showDialog(
       context: context,
       builder: (context) => CustomDialog(message: message),
@@ -75,9 +75,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => const AuthPage(),
-                        )
+                        MaterialPageRoute(builder: (context) => const AuthPage()),
                       );
                     },
                     icon: null,
@@ -90,7 +88,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                       const Text('Didn\'t receive the link?'),
                       const SizedBox(width: 4),
                       GestureDetector(
-                        onTap: resendEmail,
+                        onTap: _resendEmail,
                         child: Text(
                           'Resend',
                           style: TextStyle(color: Theme.of(context).colorScheme.primary),

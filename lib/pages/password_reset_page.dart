@@ -13,11 +13,11 @@ class PasswordResetPage extends StatefulWidget {
 }
 
 class _PasswordResetPageState extends State<PasswordResetPage> {
-  final emailTextController = TextEditingController();
+  final _emailTextController = TextEditingController();
 
-  void sendPasswordResetEmail() async {
-    if (emailTextController.text == '') {
-      displayMessage('missing-email');
+  void _sendPasswordResetEmail() async {
+    if (_emailTextController.text == '') {
+      _displayMessage('missing-email');
     } else {
       showDialog(
         context: context,
@@ -27,7 +27,7 @@ class _PasswordResetPageState extends State<PasswordResetPage> {
       );
       try {
         await FirebaseAuth.instance.sendPasswordResetEmail(
-          email: emailTextController.text
+          email: _emailTextController.text
         );
         if (context.mounted) {
           // ignore: use_build_context_synchronously
@@ -36,12 +36,12 @@ class _PasswordResetPageState extends State<PasswordResetPage> {
       } on FirebaseAuthException catch (e) {
         // ignore: use_build_context_synchronously
         Navigator.pop(context);
-        displayMessage(e.code);
+        _displayMessage(e.code);
       }
     }
   }
 
-  void displayMessage(String message) {
+  void _displayMessage(String message) {
     showDialog(
       context: context,
       builder: (context) => CustomDialog(message: message),
@@ -80,13 +80,13 @@ class _PasswordResetPageState extends State<PasswordResetPage> {
                     ),
                   ),
                   MyTextField(
-                    controller: emailTextController,
+                    controller: _emailTextController,
                     hintText: 'Email',
                     obscureText: false,
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.018),
                   MyButton(
-                    onTap: sendPasswordResetEmail,
+                    onTap: _sendPasswordResetEmail,
                     icon: null,
                     text: 'Send',
                   ),
@@ -103,9 +103,7 @@ class _PasswordResetPageState extends State<PasswordResetPage> {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => const AuthPage(),
-                            )
+                            MaterialPageRoute(builder: (context) => const AuthPage()),
                           );
                         },
                         child: Text(

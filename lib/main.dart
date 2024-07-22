@@ -8,7 +8,7 @@ import 'package:lune/themes/dark_theme.dart';
 import 'package:lune/themes/light_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future<bool> isFirstLaunch() async {
+Future<bool> _isFirstLaunch() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   final bool isFirstLaunch = prefs.getBool('firstLaunch') ?? true;
 
@@ -25,7 +25,7 @@ Future main() async {
   // ignore: empty_catches
   } catch(e) {}
 
-  final bool firstLaunch = await isFirstLaunch();
+  final bool firstLaunch = await _isFirstLaunch();
 
   runApp(MyApp(firstLaunch: firstLaunch));
 }

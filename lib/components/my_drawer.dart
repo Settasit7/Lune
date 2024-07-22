@@ -5,7 +5,7 @@ import 'package:lune/pages/settings_page.dart';
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
 
-  void logout() {
+  void _logout() {
     FirebaseAuth.instance.signOut();
   }
 
@@ -40,9 +40,7 @@ class MyDrawer extends StatelessWidget {
                     Navigator.pop(context);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const SettingsPage()
-                      )
+                      MaterialPageRoute(builder: (context) => const SettingsPage()),
                     );
                   },
                 ),
@@ -57,7 +55,7 @@ class MyDrawer extends StatelessWidget {
             child: ListTile(
               title: const Text('Logout'),
               leading: const Icon(Icons.logout),
-              onTap: logout,
+              onTap: _logout,
             ),
           ),
         ],

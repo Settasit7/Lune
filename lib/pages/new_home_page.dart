@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:english_words/english_words.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lune/components/my_drawer.dart';
@@ -25,16 +26,23 @@ class _NewHomePageState extends State<NewHomePage> {
 
   Future<void> _checkAndCreateUserProfile() async {
     final user = FirebaseAuth.instance.currentUser;
+
     if (user != null) {
       final userDoc = FirebaseFirestore.instance.collection('Users').doc(user.uid);
       final docSnapshot = await userDoc.get();
+
       if (!docSnapshot.exists) {
         await userDoc.set({
-          'uid': user.uid,
           'email': user.email,
+          'uid': user.uid,
+          'username': _capitalize(WordPair.random().toString()),
         });
       }
     }
+  }
+
+  String _capitalize(String word) {
+    return word[0].toUpperCase() + word.substring(1);
   }
 
   @override
@@ -66,16 +74,13 @@ class _NewHomePageState extends State<NewHomePage> {
   }
 
   Widget _buildUserListItem(Map<String, dynamic> userData, BuildContext context) {
-    if (userData['email'] != FirebaseAuth.instance.currentUser!.email) {
+    if (userData['uid'] != FirebaseAuth.instance.currentUser!.uid) {
       return UserTile(
-        text: userData['email'],
+        text: userData['username'],
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (context) => ChatPage(
-                receiverEmail: userData['email'],
-              ),
+            MaterialPageRoute(builder: (context) => ChatPage(receiverEmail: userData['username']),
             ),
           );
         },

@@ -7,14 +7,6 @@ import 'package:lune/pages/email_verification_page.dart';
 import 'package:lune/services/auth/auth.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-Future<void> _launchUrl() async {
-  final Uri url = Uri.parse('https://thevendorapplication.web.app/terms-of-services.txt');
-
-  if (!await launchUrl(url)) {
-    throw Exception('Could not launch $url');
-  }
-}
-
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
@@ -23,13 +15,13 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  final emailTextController = TextEditingController();
-  final passwordTextController = TextEditingController();
-  final confirmPasswordTextController = TextEditingController();
+  final _emailTextController = TextEditingController();
+  final _passwordTextController = TextEditingController();
+  final _confirmPasswordTextController = TextEditingController();
 
-  void signUp() async {
-    if (emailTextController.text == '') {
-      displayMessage('missing-email');
+  void _signUp() async {
+    if (_emailTextController.text == '') {
+      _displayMessage('missing-email');
     } else {
       showDialog(
         context: context,
@@ -37,15 +29,15 @@ class _SignUpPageState extends State<SignUpPage> {
           child: CircularProgressIndicator(),
         ),
       );
-      if (passwordTextController.text != confirmPasswordTextController.text) {
+      if (_passwordTextController.text != _confirmPasswordTextController.text) {
         Navigator.pop(context);
-        displayMessage('passwords-don\'t-match');
+        _displayMessage('passwords-don\'t-match');
         return;
       }
       try {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailTextController.text,
-          password: passwordTextController.text,
+          email: _emailTextController.text,
+          password: _passwordTextController.text,
         );
         await FirebaseAuth.instance.currentUser?.sendEmailVerification();
         if (context.mounted) {
@@ -54,24 +46,30 @@ class _SignUpPageState extends State<SignUpPage> {
           Navigator.push(
             // ignore: use_build_context_synchronously
             context,
-            MaterialPageRoute(
-              builder: (context) => const EmailVerificationPage(),
-            )
+            MaterialPageRoute(builder: (context) => const EmailVerificationPage()),
           );
         }
       } on FirebaseAuthException catch (e) {
         // ignore: use_build_context_synchronously
         Navigator.pop(context);
-        displayMessage(e.code);
+        _displayMessage(e.code);
       }
     }
   }
 
-  void displayMessage(String message) {
+  void _displayMessage(String message) {
     showDialog(
       context: context,
       builder: (context) => CustomDialog(message: message),
     );
+  }
+
+  Future<void> _launchUrl() async {
+    final Uri url = Uri.parse('https://thevendorapplication.web.app/terms-of-services.txt');
+
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
+    }
   }
 
   @override
@@ -100,25 +98,25 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.036),
                   MyTextField(
-                    controller: emailTextController,
+                    controller: _emailTextController,
                     hintText: 'Email',
                     obscureText: false,
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.008),
                   MyTextField(
-                    controller: passwordTextController,
+                    controller: _passwordTextController,
                     hintText: 'Password',
                     obscureText: true,
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.008),
                   MyTextField(
-                    controller: confirmPasswordTextController,
+                    controller: _confirmPasswordTextController,
                     hintText: 'Confirm password',
                     obscureText: true,
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.018),
                   MyButton(
-                    onTap: signUp,
+                    onTap: _signUp,
                     icon: null,
                     text: 'Sign up',
                   ),
@@ -151,9 +149,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => const AuthPage(),
-                            )
+                            MaterialPageRoute(builder: (context) => const AuthPage()),
                           );
                         },
                         child: Text(
