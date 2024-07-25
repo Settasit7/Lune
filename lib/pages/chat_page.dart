@@ -1,16 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:lune/components/chat_bubble.dart';
 import 'package:lune/components/my_text_field.dart';
 import 'package:lune/services/chat/chat_service.dart';
 
 class ChatPage extends StatelessWidget {
-  final String receiverEmail;
+  final String receiverUsername;
   final String receiverID;
 
   ChatPage({
     super.key,
-    required this.receiverEmail,
+    required this.receiverUsername,
     required this.receiverID,
   });
 
@@ -30,7 +31,7 @@ class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(receiverEmail)),
+      appBar: AppBar(title: Text(receiverUsername)),
       body: Column(
         children: [
           Expanded(
@@ -66,24 +67,48 @@ class ChatPage extends StatelessWidget {
 
   Widget _buildMessageItem(DocumentSnapshot doc) {
     Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-    return Text(data['message']);
+    
+    final bool isCurrentUser = data['senderID'] == FirebaseAuth.instance.currentUser!.uid;
+    
+    return Column(
+      crossAxisAlignment: isCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+      children: [
+        ChatBubble(
+          message: data['message'],
+          isCurrentUser: isCurrentUser,
+        )
+      ],
+    );
   }
 
   Widget _buildUserInput() {
-    return Row(
-      children: [
-        Expanded(
-          child: MyTextField(
-            controller: _messageController,
-            hintText: 'Type here',
-            obscureText: false,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 50),
+      child: Row(
+        children: [
+          Expanded(
+            child: MyTextField(
+              controller: _messageController,
+              hintText: 'Type here',
+              obscureText: false,
+            ),
           ),
-        ),
-        IconButton(
-          onPressed: sendMessage,
-          icon: const Icon(Icons.arrow_upward),
-        )
-      ],
+          Container(
+            decoration: const BoxDecoration(
+              color: Colors.green,
+              shape: BoxShape.circle,
+            ),
+            margin: const EdgeInsets.only(right: 25),
+            child: IconButton(
+              onPressed: sendMessage,
+              icon: const Icon(
+                Icons.arrow_upward,
+                color: Colors.white,
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
