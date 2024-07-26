@@ -28,12 +28,11 @@ class _NewHomePageState extends State<NewHomePage> {
     final user = FirebaseAuth.instance.currentUser;
 
     if (user != null) {
-      final userDoc = FirebaseFirestore.instance.collection('Users').doc(user.uid);
+      final userDoc = FirebaseFirestore.instance.collection('users').doc(user.uid);
       final docSnapshot = await userDoc.get();
 
       if (!docSnapshot.exists) {
         await userDoc.set({
-          'email': user.email,
           'uid': user.uid,
           'username': _capitalize(WordPair.random().toString()),
         });
@@ -48,8 +47,12 @@ class _NewHomePageState extends State<NewHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         title: const Text('Home'),
+        backgroundColor: Colors.transparent,
+        foregroundColor: Colors.grey,
+        elevation: 0,
       ),
       drawer: const MyDrawer(),
       body: _buildUserList(),
