@@ -2,30 +2,74 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lune/components/chat_bubble.dart';
+import 'package:lune/components/message_field.dart';
 import 'package:lune/components/my_text_field.dart';
 import 'package:lune/services/chat/chat_service.dart';
 
-class ChatPage extends StatelessWidget {
+class ChatPage extends StatefulWidget {
   final String receiverUsername;
   final String receiverID;
 
-  ChatPage({
+  const ChatPage({
     super.key,
     required this.receiverUsername,
     required this.receiverID,
   });
 
+  @override
+  State<ChatPage> createState() => _ChatPageState();
+}
+
+class _ChatPageState extends State<ChatPage> {
   final TextEditingController _messageController = TextEditingController();
+
   final ChatService _chatService = ChatService();
+
+  final FocusNode _myFocusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _myFocusNode.addListener(() {
+      if (_myFocusNode.hasFocus) {
+        Future.delayed(
+          const Duration(milliseconds: 500),
+          () => scrollDown(),
+        );
+      }
+    });
+
+    Future.delayed(
+      const Duration(milliseconds: 500),
+      () => scrollDown(),
+    );
+  }
+
+  @override
+  void dispose() {
+    _myFocusNode.dispose();
+    _messageController.dispose();
+    super.dispose();
+  }
+
+  final ScrollController _scrollController = ScrollController();
+  void scrollDown() {
+    _scrollController.animateTo(
+      _scrollController.position.maxScrollExtent,
+      duration: const Duration(seconds: 1),
+      curve: Curves.fastOutSlowIn,
+    );
+  }
 
   void sendMessage() async {
     if (_messageController.text.isNotEmpty) {
       await _chatService.sendMessage(
-        receiverID,
+        widget.receiverID,
         _messageController.text,
       );
       _messageController.clear();
     }
+    scrollDown();
   }
 
   @override
@@ -33,7 +77,7 @@ class ChatPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
-        title: Text(receiverUsername),
+        title: Text(widget.receiverUsername),
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.grey,
         elevation: 0,
@@ -53,7 +97,7 @@ class ChatPage extends StatelessWidget {
     String senderID = FirebaseAuth.instance.currentUser!.uid;
     return StreamBuilder(
       stream: _chatService.getMessages(
-        receiverID,
+        widget.receiverID,
         senderID,
       ),
       builder: (context, snapshot) {
@@ -64,6 +108,7 @@ class ChatPage extends StatelessWidget {
           return const Text('Loading...');
         }
         return ListView(
+          controller: _scrollController,
           children: 
             snapshot.data!.docs.map((doc) => _buildMessageItem(doc)).toList(),
         );
@@ -93,10 +138,11 @@ class ChatPage extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: MyTextField(
+            child: MessageField(
               controller: _messageController,
               hintText: 'Type here',
               obscureText: false,
+              focusNode: _myFocusNode,
             ),
           ),
           Container(
