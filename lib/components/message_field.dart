@@ -24,14 +24,14 @@ class MessageField extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Theme.of(context).colorScheme.tertiary,
-            // offset: _focusNode.hasFocus ? Offset(MediaQuery.of(context).size.height * 0.008, MediaQuery.of(context).size.height * 0.008) : Offset(MediaQuery.of(context).size.height * 0.004, MediaQuery.of(context).size.height * 0.004),
-            // blurRadius: _focusNode.hasFocus ? MediaQuery.of(context).size.height * 0.018 : MediaQuery.of(context).size.height * 0.008,
+            offset: focusNode!.hasFocus ? Offset(MediaQuery.of(context).size.height * 0.008, MediaQuery.of(context).size.height * 0.008) : Offset(MediaQuery.of(context).size.height * 0.004, MediaQuery.of(context).size.height * 0.004),
+            blurRadius: focusNode!.hasFocus ? MediaQuery.of(context).size.height * 0.018 : MediaQuery.of(context).size.height * 0.008,
             inset: true,
           ),
           BoxShadow(
             color: Theme.of(context).colorScheme.secondary,
-            // offset: _focusNode.hasFocus ? Offset(-MediaQuery.of(context).size.height * 0.008, -MediaQuery.of(context).size.height * 0.008) : Offset(-MediaQuery.of(context).size.height * 0.004, -MediaQuery.of(context).size.height * 0.004),
-            // blurRadius: _focusNode.hasFocus ? MediaQuery.of(context).size.height * 0.018 : MediaQuery.of(context).size.height * 0.008,
+            offset: focusNode!.hasFocus ? Offset(-MediaQuery.of(context).size.height * 0.008, -MediaQuery.of(context).size.height * 0.008) : Offset(-MediaQuery.of(context).size.height * 0.004, -MediaQuery.of(context).size.height * 0.004),
+            blurRadius: focusNode!.hasFocus ? MediaQuery.of(context).size.height * 0.018 : MediaQuery.of(context).size.height * 0.008,
             inset: true,
           ),
         ],
@@ -57,6 +57,7 @@ class MessageField extends StatelessWidget {
           ),
           obscureText: obscureText,
           cursorColor: Theme.of(context).colorScheme.onSurface,
+          maxLines: null,
         ),
       ),
     );

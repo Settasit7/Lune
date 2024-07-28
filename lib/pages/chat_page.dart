@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lune/components/chat_bubble.dart';
 import 'package:lune/components/message_field.dart';
-import 'package:lune/components/my_text_field.dart';
 import 'package:lune/services/chat/chat_service.dart';
 
 class ChatPage extends StatefulWidget {
@@ -158,7 +157,7 @@ class _ChatPageState extends State<ChatPage> {
                 color: Colors.white,
               ),
             ),
-          )
+          ),
         ],
       ),
     );
