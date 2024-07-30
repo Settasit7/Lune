@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lune/pages/blocked_users_page.dart';
 import 'package:lune/pages/new_home_page.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -38,9 +39,12 @@ class SettingsPage extends StatelessWidget {
                     IconButton(
                       onPressed: () => Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const NewHomePage()),
+                        MaterialPageRoute(builder: (context) => BlockedUsersPage()),
                       ),
-                      icon: const Icon(Icons.arrow_forward_rounded),
+                      icon: Icon(
+                        Icons.arrow_forward_rounded,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                     ),
                   ],
                 ),
