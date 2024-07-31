@@ -10,13 +10,35 @@ class BlockedUsersPage extends StatelessWidget {
   final AuthService authService = AuthService();
 
   void _showUnblockBox(BuildContext context, String userId) {
-
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Unblock user'),
+        content: const Text('Sure?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              _chatService.unblockUser(userId);
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('User unblocked')),
+              );
+            },
+            child: const Text('Unblock'),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
 
-    String userId = authService.getCurrentUser()!.uid;
+    //String userId = authService.getCurrentUser()!.uid;
 
     return Scaffold(
       appBar: AppBar(
@@ -24,7 +46,7 @@ class BlockedUsersPage extends StatelessWidget {
         actions: const [],
       ),
       body: StreamBuilder<List<Map<String, dynamic>>>(
-        stream: _chatService.getBlockedUsersStream(userId),
+        stream: _chatService.getBlockedUsersStream(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return const Center(

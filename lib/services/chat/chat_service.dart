@@ -6,33 +6,50 @@ class ChatService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  Stream<List<Map<String, dynamic>>> getUsersStream() {
-    return _firestore.collection('users').snapshots().map((snapshot) {
-      return snapshot.docs.map((doc) {
-        final user = doc.data();
-        return user;
-      }).toList();
-    });
-  }
+  // Stream<List<Map<String, dynamic>>> getUsersStream() {
+  //   return _firestore.collection('users').snapshots().map((snapshot) {
+  //     return snapshot.docs.map((doc) {
+  //       final user = doc.data();
+  //       return user;
+  //     }).toList();
+  //   });
+  // }
 
-  Stream<List<Map<String, dynamic>>> getUsersStreamExcludingBlocked() {
-    final currentUser = _auth.currentUser;
+Stream<List<Map<String, dynamic>>> getUsersStreamExcludingBlocked() {
+  final currentUser = _auth.currentUser;
 
-    return _firestore
-      .collection('users')
-      .doc(currentUser!.uid)
-      .collection('blocked_users')
+  return _firestore
+      .collection('blockings')
+      .where('blockerId', isEqualTo: currentUser!.uid)
       .snapshots()
       .asyncMap((snapshot) async {
-        final blockedUserIds = snapshot.docs.map((doc) => doc.id).toList();
+        final blockedUserIds = snapshot.docs.map((doc) => doc['blockedId']).toList();
+        
+        // Also get users who have blocked the current user
+        final blockedByOthersSnapshot = await _firestore
+          .collection('blockings')
+          .where('blockedId', isEqualTo: currentUser.uid)
+          .get();
+        final blockedByOtherUserIds = blockedByOthersSnapshot.docs.map((doc) => doc['blockerId']).toList();
+
+        final allBlockedUserIds = [...blockedUserIds, ...blockedByOtherUserIds];
+
         final usersSnapshot = await _firestore.collection('users').get();
 
         return usersSnapshot.docs
-          .where((doc) => doc.data()['uid'] != currentUser.uid && !blockedUserIds.contains(doc.id))
+          .where((doc) => doc.id != currentUser.uid && !allBlockedUserIds.contains(doc.id))
           .map((doc) => doc.data())
           .toList();
       });
-  }
+}
+
+
+Future<void> blockUser(String blockedId) async {
+  await _firestore.collection('blockings').doc().set({
+    'blockerId': FirebaseAuth.instance.currentUser!.uid,
+    'blockedId': blockedId,
+  });
+}
 
   Future<void> sendMessage(String receiverID, message) async {
     final String currentUserID = _auth.currentUser!.uid;
@@ -80,16 +97,16 @@ class ChatService {
     await _firestore.collection('reports').add(report);
   }
 
-  Future<void> blockUser(String userId) async {
-    final currentUser = _auth.currentUser;
-    await _firestore
-      .collection('users')
-      .doc(currentUser!.uid)
-      .collection('blocked_users')
-      .doc(userId)
-      .set({});
-    //notifyListeners();
-  }
+  // Future<void> blockUser(String userId) async {
+  //   final currentUser = _auth.currentUser;
+  //   await _firestore
+  //     .collection('users')
+  //     .doc(currentUser!.uid)
+  //     .collection('blocked_users')
+  //     .doc(userId)
+  //     .set({});
+  //   //notifyListeners();
+  // }
 
   Future<void> unblockUser(String blockedUserId) async {
     final currentUser = _auth.currentUser;
@@ -101,18 +118,28 @@ class ChatService {
       .delete();
   }
 
-  Stream<List<Map<String, dynamic>>> getBlockedUsersStream(String userId) {
-    return _firestore
-      .collection('users')
-      .doc(userId)
-      .collection('blocked_users')
+Stream<List<Map<String, dynamic>>> getBlockedUsersStream() {
+  final currentUser = _auth.currentUser;
+
+  return _firestore
+      .collection('blockings')
+      .where('blockerId', isEqualTo: currentUser!.uid)
       .snapshots()
       .asyncMap((snapshot) async {
-        final blockedUserIds = snapshot.docs.map((doc) => doc.id).toList();
-        final userDocs = await Future.wait(
-          blockedUserIds.map((id) => _firestore.collection('users').doc(id).get()),
-        );
-        return userDocs.map((doc) => doc.data() as Map<String, dynamic>).toList();
+        final blockedUserIds = snapshot.docs.map((doc) => doc['blockedId']).toList();
+
+        if (blockedUserIds.isEmpty) {
+          return [];
+        }
+
+        final blockedUsersSnapshot = await _firestore
+            .collection('users')
+            .where(FieldPath.documentId, whereIn: blockedUserIds)
+            .get();
+
+        return blockedUsersSnapshot.docs.map((doc) => doc.data()).toList();
       });
-  }
+}
+
+
 }
