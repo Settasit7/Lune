@@ -118,28 +118,25 @@ Future<void> blockUser(String blockedId) async {
       .delete();
   }
 
-Stream<List<Map<String, dynamic>>> getBlockedUsersStream() {
-  final currentUser = _auth.currentUser;
+  Stream<List<Map<String, dynamic>>> getBlockedUsersStream() {
+    final currentUser = _auth.currentUser;
 
-  return _firestore
-      .collection('blockings')
-      .where('blockerId', isEqualTo: currentUser!.uid)
-      .snapshots()
-      .asyncMap((snapshot) async {
-        final blockedUserIds = snapshot.docs.map((doc) => doc['blockedId']).toList();
+    return _firestore
+        .collection('blockings')
+        .where('blockerId', isEqualTo: currentUser!.uid)
+        .snapshots()
+        .asyncMap((snapshot) async {
+          final blockedUserIds = snapshot.docs.map((doc) => doc['blockedId']).toList();
 
-        if (blockedUserIds.isEmpty) {
-          return [];
-        }
-
-        final blockedUsersSnapshot = await _firestore
-            .collection('users')
-            .where(FieldPath.documentId, whereIn: blockedUserIds)
-            .get();
-
-        return blockedUsersSnapshot.docs.map((doc) => doc.data()).toList();
-      });
-}
-
-
+          if (blockedUserIds.isEmpty) {
+            return [];
+          }
+          final blockedUsersSnapshot = await _firestore
+              .collection('users')
+              .where(FieldPath.documentId, whereIn: blockedUserIds)
+              .get();
+              
+          return blockedUsersSnapshot.docs.map((doc) => doc.data()).toList();
+        });
+  }
 }
