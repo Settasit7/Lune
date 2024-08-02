@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: lightTheme,
       darkTheme: darkTheme,
-      home: firstLaunch ? const IntroductionPage() : const AuthPage(),
+      home: firstLaunch ? IntroductionPage() : const AuthPage(),
     );
   }
 }
