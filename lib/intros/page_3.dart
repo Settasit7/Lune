@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Page3 extends StatelessWidget {
-  const Page3({Key? key}) : super(key: key);
+  const Page3({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,8 +11,26 @@ class Page3 extends StatelessWidget {
         padding: const EdgeInsets.all(40),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
-          child: Container(
-            color: Theme.of(context).colorScheme.primary,
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surface,
+                borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height * 0.034),
+                boxShadow: [
+                  BoxShadow(
+                    color: Theme.of(context).colorScheme.secondary,
+                    offset: Offset(-MediaQuery.of(context).size.height * 0.008, -MediaQuery.of(context).size.height * 0.008),
+                    blurRadius: MediaQuery.of(context).size.height * 0.008,
+                  ),
+                  BoxShadow(
+                    color: Theme.of(context).colorScheme.tertiary,
+                    offset: Offset(MediaQuery.of(context).size.height * 0.008, MediaQuery.of(context).size.height * 0.008),
+                    blurRadius: MediaQuery.of(context).size.height * 0.008,
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ),
