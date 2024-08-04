@@ -39,7 +39,7 @@ class IntroductionPage extends StatelessWidget {
           SmoothPageIndicator(
             controller: _controller,
             count: 3,
-            effect: JumpingDotEffect(
+            effect: ColorTransitionEffect(
               activeDotColor: Theme.of(context).colorScheme.primary,
               dotColor: Theme.of(context).colorScheme.tertiary,
             ),
