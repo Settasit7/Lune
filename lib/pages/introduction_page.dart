@@ -17,7 +17,7 @@ class IntroductionPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           SizedBox(
-            height: 480,
+            height: 484,
             child: PageView(
               controller: _controller,
               onPageChanged: (index) {
