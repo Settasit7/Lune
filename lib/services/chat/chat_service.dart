@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:lune/models/message.dart';
 
-class ChatService {
+class ChatService extends ChangeNotifier {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -49,6 +50,7 @@ Future<void> blockUser(String blockedId) async {
     'blockerId': FirebaseAuth.instance.currentUser!.uid,
     'blockedId': blockedId,
   });
+  notifyListeners();
 }
 
   Future<void> sendMessage(String receiverID, message) async {
